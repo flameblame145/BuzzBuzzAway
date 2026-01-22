@@ -1,62 +1,149 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pick Your Options</title>
+  <title>BuzzBuzzAway</title>
 
   <style>
+    /* 🌌 PURE CSS GALAXY BACKGROUND (no images needed) */
     body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #f2f2f2;
       margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: radial-gradient(circle at center, #2a0055, #08001a 70%, #000 100%);
+      overflow-x: hidden;
     }
 
+    /* ✨ Procedural stars (no image, no errors) */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      pointer-events: none;
+      z-index: -1;
+      box-shadow:
+        2vw 4vh 2px #fff,
+        10vw 20vh 2px #fff,
+        30vw 60vh 2px #fff,
+        50vw 10vh 2px #fff,
+        80vw 70vh 2px #fff,
+        90vw 30vh 2px #fff,
+        15vw 80vh 2px #fff,
+        70vw 40vh 2px #fff;
+      animation: drift 60s linear infinite;
+    }
+
+    @keyframes drift {
+      from { transform: translateY(0); }
+      to { transform: translateY(-2000px); }
+    }
+
+    /* 🐝 LOGO TITLE */
     header {
       text-align: center;
-      padding: 1.5rem;
+      margin-top: 10px;
     }
 
-    .options-container {
-      max-width: 900px;
+    header img {
+      width: 300px;
+      cursor: pointer;
+      transition: 0.25s;
+      filter: drop-shadow(0 0 25px #ffcc00);
+    }
+
+    header img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 40px #ffe680);
+    }
+
+    /* 🌠 Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      padding: 1rem;
+    }
+
+    nav a {
+      background: rgba(80, 0, 120, 0.5);
+      padding: 0.6rem 1.2rem;
+      color: #fff;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 18px #b184ff;
+      backdrop-filter: blur(6px);
+      transition: 0.25s;
+    }
+
+    nav a:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 30px #e2c8ff;
+    }
+
+    /* 🟣 Product Cards */
+    .container {
+      max-width: 1200px;
       margin: auto;
       padding: 2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
     }
 
-    .option-btn {
-      background: #222;
-      border: none;
-      padding: 14px;
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: rgba(50, 0, 90, 0.6);
+      border-radius: 16px;
+      padding: 1.2rem;
+      text-align: center;
+      border: 2px solid #c788ff;
+      box-shadow: 0 0 35px #a45cff;
+      backdrop-filter: blur(8px);
+      transition: 0.3s;
+    }
+
+    .product-card:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 50px #d7b0ff;
+    }
+
+    .product-image {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 25px #c788ff;
+    }
+
+    .purchase-button {
+      background: linear-gradient(90deg, #9b4dff, #d178ff);
+      padding: 12px 28px;
       color: #fff;
       border-radius: 10px;
-      font-size: 0.95rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
-    }
-
-    .option-btn:hover {
-      background: #007bff;
-      transform: scale(1.05);
-    }
-
-    .back {
-      display: block;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .back a {
-      color: #fff;
       text-decoration: none;
-      background: #333;
-      padding: 10px 20px;
-      border-radius: 8px;
       font-weight: bold;
+      display: inline-block;
+      margin-top: 15px;
+      box-shadow: 0 0 20px #b184ff;
+      transition: 0.25s;
+    }
+
+    .purchase-button:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 40px #e6c6ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #d8baff;
+      text-shadow: 0 0 12px #b184ff;
     }
   </style>
 </head>
@@ -64,31 +151,38 @@
 <body>
 
 <header>
-  <h1>Select Your Options</h1>
+  <!-- CLICK LOGO TO REFRESH THE PAGE -->
+  <img src="buzzbuzzaway.png" alt="BuzzBuzzAway Logo" onclick="location.reload()">
 </header>
 
-<div class="back">
-  <a href="index.html">← Back</a>
+<nav>
+  <a href="https://discord.gg/qyZEhex3HJ" target="_blank">Discord</a>
+  <a href="options.html">Options</a>
+  <a href="https://www.tiktok.com/@abandonedtweaks.xyz" target="_blank">TikTok</a>
+  <a href="https://abandonedtweaks.xyz/reviews.html" target="_blank">Reviews</a>
+</nav>
+
+<div class="container">
+  <div class="products">
+
+    <div class="product-card">
+      <h3>Geek Bar Pulse X</h3>
+
+      <img
+        src="Geekbar_Pulse_X_25000_Disposable_Vape_Pick_10.webp"
+        alt="Geek Bar Pulse X"
+        class="product-image"
+      />
+
+      <a href="options.html" class="purchase-button">Choose Options</a>
+    </div>
+
+  </div>
 </div>
 
-<div class="options-container">
-  <button class="option-btn">Blackberry B-Burst</button>
-  <button class="option-btn">Blackberry Blueberry</button>
-  <button class="option-btn">Blueberry Jam</button>
-  <button class="option-btn">Blue Razz Ice</button>
-  <button class="option-btn">Cola Slush</button>
-  <button class="option-btn">Cool Mint</button>
-  <button class="option-btn">Lemon Heads</button>
-  <button class="option-btn">Sour Apple Ice</button>
-  <button class="option-btn">Sour Fen Fab</button>
-  <button class="option-btn">Sour Mango Pinepple</button>
-  <button class="option-btn">Sour Straws</button>
-  <button class="option-btn">Strawberry B-Pop</button>
-  <button class="option-btn">Strawberry Watermeion</button>
-  <button class="option-btn">Watermelon Ice</button>
-  <button class="option-btn">White Peach Raspberry</button>
-  <button class="option-btn">Wild Cherry Slush</button>
-</div>
+<footer>
+  © 2025 BuzzBuzzAway. All rights reserved.
+</footer>
 
 </body>
 </html>
