@@ -113,6 +113,21 @@ input {
   outline: none;
   background: rgba(255,255,255,0.12);
   color: white;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* RED ERROR STYLE */
+.input-error {
+  background: rgba(255, 0, 0, 0.2);
+  animation: vibrate 0.15s linear 0s 3;
+}
+
+@keyframes vibrate {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
 }
 
 /* PAY BUTTON */
@@ -134,6 +149,16 @@ button {
 button:hover {
   transform: scale(1.04);
   box-shadow: 0 0 35px rgba(170, 100, 255, 0.9);
+}
+
+/* ERROR MESSAGE */
+.error-message {
+  color: #ff4d4d;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 12px;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 /* FOOTER NOTE */
@@ -158,23 +183,52 @@ button:hover {
   </div>
 
   <label>Cardholder Name</label>
-  <input type="text" placeholder="John Doe">
+  <input type="text" id="name" placeholder="John Doe">
 
   <label>Card Number</label>
-  <input type="text" placeholder="1234 5678 9012 3456">
+  <input type="text" id="card" placeholder="1234 5678 9012 3456">
 
   <label>Expiration Date</label>
-  <input type="text" placeholder="MM / YY">
+  <input type="text" id="exp" placeholder="MM / YY">
 
   <label>CVV</label>
-  <input type="password" placeholder="***">
+  <input type="password" id="cvv" placeholder="***">
 
-  <button>Complete Purchase</button>
+  <button id="purchaseBtn">Complete Purchase</button>
+
+  <div class="error-message" id="errorMsg">Finish Your Payment Information</div>
 
   <div class="note">
     This is a fictional checkout UI for design demonstration only.
   </div>
 </div>
+
+<script>
+// GET ELEMENTS
+const button = document.getElementById("purchaseBtn");
+const inputs = [document.getElementById("name"), document.getElementById("card"), document.getElementById("exp"), document.getElementById("cvv")];
+const errorMsg = document.getElementById("errorMsg");
+
+button.addEventListener("click", () => {
+  let empty = false;
+
+  inputs.forEach(input => {
+    if (!input.value.trim()) {
+      empty = true;
+      input.classList.add("input-error");
+      setTimeout(() => input.classList.remove("input-error"), 800); // fade back
+    }
+  });
+
+  if (empty) {
+    errorMsg.style.opacity = "1";
+    // hide after 2 seconds
+    setTimeout(() => { errorMsg.style.opacity = "0"; }, 2000);
+  } else {
+    alert("Payment Completed! (Demo)"); // placeholder action
+  }
+});
+</script>
 
 </body>
 </html>
