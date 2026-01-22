@@ -6,55 +6,62 @@
   <title>BuzzBuzzAway</title>
 
   <style>
-    /* 🌌 Galaxy Background */
+    /* 🌌 PURE CSS GALAXY BACKGROUND (no images needed) */
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      color: #ffffff;
-      background: radial-gradient(circle at center, #1a0033, #000010 70%);
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: radial-gradient(circle at center, #2a0055, #08001a 70%, #000 100%);
       overflow-x: hidden;
-      background-attachment: fixed;
     }
 
-    /* ✨ Animated Stars */
+    /* ✨ Procedural stars (no image, no errors) */
     body::before {
       content: "";
       position: fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background: url('https://i.imgur.com/1K9Z1bB.png'); /* star texture */
-      opacity: 0.25;
-      animation: floatStars 80s linear infinite;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       pointer-events: none;
       z-index: -1;
+      box-shadow:
+        2vw 4vh 2px #fff,
+        10vw 20vh 2px #fff,
+        30vw 60vh 2px #fff,
+        50vw 10vh 2px #fff,
+        80vw 70vh 2px #fff,
+        90vw 30vh 2px #fff,
+        15vw 80vh 2px #fff,
+        70vw 40vh 2px #fff;
+      animation: drift 60s linear infinite;
     }
 
-    @keyframes floatStars {
+    @keyframes drift {
       from { transform: translateY(0); }
       to { transform: translateY(-2000px); }
     }
 
-    /* ⭐ Logo */
+    /* 🐝 LOGO TITLE */
     header {
       text-align: center;
-      padding: 1rem;
+      margin-top: 10px;
     }
 
     header img {
-      width: 280px;
+      width: 300px;
       cursor: pointer;
       transition: 0.25s;
-      filter: drop-shadow(0 0 25px #8c52ff);
+      filter: drop-shadow(0 0 25px #ffcc00);
     }
 
     header img:hover {
       transform: scale(1.05);
-      filter: drop-shadow(0 0 40px #b184ff);
+      filter: drop-shadow(0 0 40px #ffe680);
     }
 
-    /* 🚀 Navigation Bar */
+    /* 🌠 Navigation */
     nav {
       display: flex;
       justify-content: center;
@@ -63,23 +70,23 @@
     }
 
     nav a {
-      color: #fff;
-      text-decoration: none;
+      background: rgba(80, 0, 120, 0.5);
       padding: 0.6rem 1.2rem;
+      color: #fff;
       border-radius: 12px;
+      text-decoration: none;
       font-weight: bold;
-      background: rgba(50, 0, 80, 0.55);
-      backdrop-filter: blur(6px);
       box-shadow: 0 0 18px #b184ff;
+      backdrop-filter: blur(6px);
       transition: 0.25s;
     }
 
     nav a:hover {
       transform: scale(1.08);
-      box-shadow: 0 0 25px #d2b3ff;
+      box-shadow: 0 0 30px #e2c8ff;
     }
 
-    /* 🌠 Product Area */
+    /* 🟣 Product Cards */
     .container {
       max-width: 1200px;
       margin: auto;
@@ -92,59 +99,50 @@
       gap: 1.5rem;
     }
 
-    /* 🟣 Glowing Product Cards */
     .product-card {
-      background: rgba(40, 0, 70, 0.65);
+      background: rgba(50, 0, 90, 0.6);
       border-radius: 16px;
-      padding: 1rem;
+      padding: 1.2rem;
       text-align: center;
-      box-shadow: 0 0 35px #9b5bff;
+      border: 2px solid #c788ff;
+      box-shadow: 0 0 35px #a45cff;
       backdrop-filter: blur(8px);
       transition: 0.3s;
-      border: 2px solid #b184ff;
     }
 
     .product-card:hover {
       transform: scale(1.04);
-      box-shadow: 0 0 45px #cda6ff;
+      box-shadow: 0 0 50px #d7b0ff;
     }
 
-    /* 📦 Product Image */
     .product-image {
       width: 100%;
-      max-width: 350px;
       border-radius: 12px;
-      margin: 1rem auto;
-      display: block;
-      box-shadow: 0 0 25px #b184ff;
+      box-shadow: 0 0 25px #c788ff;
     }
 
-    /* 💫 Buttons */
     .purchase-button {
+      background: linear-gradient(90deg, #9b4dff, #d178ff);
+      padding: 12px 28px;
+      color: #fff;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
       display: inline-block;
       margin-top: 15px;
-      padding: 12px 28px;
-      background: linear-gradient(90deg, #8c52ff, #d580ff);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 1.1rem;
       box-shadow: 0 0 20px #b184ff;
       transition: 0.25s;
     }
 
     .purchase-button:hover {
       transform: scale(1.06);
-      box-shadow: 0 0 35px #e6c6ff;
+      box-shadow: 0 0 40px #e6c6ff;
     }
 
-    /* 🌌 Footer */
     footer {
       text-align: center;
       padding: 1rem;
-      color: #d3b3ff;
-      margin-top: 2rem;
+      color: #d8baff;
       text-shadow: 0 0 12px #b184ff;
     }
   </style>
@@ -153,7 +151,7 @@
 <body>
 
 <header>
-  <!-- CLICK LOGO TO REFRESH -->
+  <!-- CLICK LOGO TO REFRESH THE PAGE -->
   <img src="buzzbuzzaway.png" alt="BuzzBuzzAway Logo" onclick="location.reload()">
 </header>
 
@@ -169,9 +167,6 @@
 
     <div class="product-card">
       <h3>Geek Bar Pulse X</h3>
-      <div class="description">
-        Pick 10 – Select your preferred options on the next page.
-      </div>
 
       <img
         src="Geekbar_Pulse_X_25000_Disposable_Vape_Pick_10.webp"
@@ -186,7 +181,7 @@
 </div>
 
 <footer>
-  &copy; 2025 BuzzBuzzAway. All rights reserved.
+  © 2025 BuzzBuzzAway. All rights reserved.
 </footer>
 
 </body>
