@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pick Your Options</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #f2f2f2;
+      margin: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .options-container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .option-btn {
+      background: #222;
+      border: none;
+      padding: 14px;
+      color: #fff;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .option-btn:hover {
+      background: #007bff;
+      transform: scale(1.05);
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .back a {
+      color: #fff;
+      text-decoration: none;
+      background: #333;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Select Your Options</h1>
+</header>
+
+<div class="back">
+  <a href="index.html">← Back</a>
+</div>
+
+<div class="options-container">
+  <button class="option-btn">Blackberry B-Burst</button>
+  <button class="option-btn">Blackberry Blueberry</button>
+  <button class="option-btn">Blueberry Jam</button>
+  <button class="option-btn">Blue Razz Ice</button>
+  <button class="option-btn">Cola Slush</button>
+  <button class="option-btn">Cool Mint</button>
+  <button class="option-btn">Lemon Heads</button>
+  <button class="option-btn">Sour Apple Ice</button>
+  <button class="option-btn">Sour Fen Fab</button>
+  <button class="option-btn">Sour Mango Pinepple</button>
+  <button class="option-btn">Sour Straws</button>
+  <button class="option-btn">Strawberry B-Pop</button>
+  <button class="option-btn">Strawberry Watermeion</button>
+  <button class="option-btn">Watermelon Ice</button>
+  <button class="option-btn">White Peach Raspberry</button>
+  <button class="option-btn">Wild Cherry Slush</button>
+</div>
+
+</body>
+</html>
