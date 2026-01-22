@@ -6,44 +6,64 @@
   <title>BuzzBuzzAway</title>
 
   <style>
-    /* 🌌 GALAXY BACKGROUND (pure CSS, no images) */
+    /* 🌌 FIXED GALAXY BACKGROUND */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: radial-gradient(circle at center, #2a0066, #0a001f 70%, #000 100%);
+      background: radial-gradient(circle at center, #280060, #0b0020 70%, #000 100%);
       color: #fff;
       overflow-x: hidden;
+      position: relative;
     }
 
-    /* ★ Stars (no external image used) */
-    body::before {
-      content: "";
+    /* ⭐ CLEAN, INFINITE STAR LAYERS */
+    .stars, .stars2, .stars3 {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
+      background-repeat: repeat;
+      background-position: 0 0;
       z-index: -1;
-      background: transparent;
-      box-shadow:
-        10vw 10vh 2px #ffffff,
-        20vw 70vh 2px #ffffff,
-        40vw 30vh 2px #ffffff,
-        60vw 90vh 2px #ffffff,
-        80vw 20vh 2px #ffffff,
-        50vw 50vh 2px #ffffff,
-        30vw 80vh 2px #ffffff,
-        70vw 40vh 2px #ffffff;
-      animation: stars 60s linear infinite;
+      pointer-events: none;
     }
 
-    @keyframes stars {
-      from { transform: translateY(0); }
-      to { transform: translateY(-2000px); }
+    /* far stars */
+    .stars {
+      background-image:
+        radial-gradient(2px 2px at 20% 20%, white, transparent),
+        radial-gradient(2px 2px at 80% 40%, white, transparent),
+        radial-gradient(2px 2px at 50% 60%, white, transparent),
+        radial-gradient(2px 2px at 30% 80%, white, transparent);
+      animation: moveStars 80s linear infinite;
     }
 
-    /* 🐝 CARTOON TITLE (replaces the image) */
+    /* mid stars */
+    .stars2 {
+      background-image:
+        radial-gradient(3px 3px at 10% 70%, white, transparent),
+        radial-gradient(3px 3px at 60% 20%, white, transparent),
+        radial-gradient(3px 3px at 90% 50%, white, transparent);
+      opacity: 0.7;
+      animation: moveStars 120s linear infinite;
+    }
+
+    /* close bright stars */
+    .stars3 {
+      background-image:
+        radial-gradient(4px 4px at 40% 30%, white, transparent),
+        radial-gradient(4px 4px at 70% 90%, white, transparent);
+      opacity: 0.4;
+      animation: moveStars 160s linear infinite;
+    }
+
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: 0 2000px; }
+    }
+
+    /* 🐝 CARTOON TITLE */
     header {
       text-align: center;
       padding: 20px 0 5px 0;
@@ -53,32 +73,17 @@
     header h1 {
       font-size: 4rem;
       font-weight: 900;
-      text-transform: none;
-      margin: 0;
-
-      /* Logo-style gradients */
-      background: linear-gradient(
-        90deg,
-        #ffcc33,
-        #ff9900,
-        #ff8800,
-        #ffc000,
-        #00c8ff,
-        #0096ff
-      );
+      background: linear-gradient(90deg, #ffcc33, #ff9900, #ff8800, #ffc000, #00c8ff, #0096ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-
-      /* Thick brown outline like the real logo */
       text-shadow:
         4px 4px 0 #5a2d00,
         7px 7px 12px rgba(255, 200, 0, 0.5);
-
-      /* Glow */
       filter: drop-shadow(0 0 18px #ffd760);
+      margin: 0;
     }
 
-    /* Honey drip line under the text */
+    /* Honey drip */
     .drip {
       width: 260px;
       height: 18px;
@@ -125,7 +130,7 @@
       box-shadow: 0 0 30px #f0ddff;
     }
 
-    /* Product container */
+    /* Product layout */
     .container {
       max-width: 1200px;
       margin: auto;
@@ -138,7 +143,6 @@
       gap: 1.5rem;
     }
 
-    /* Product card with glow */
     .product-card {
       background: rgba(40, 0, 80, 0.5);
       padding: 1.2rem;
@@ -179,6 +183,28 @@
       box-shadow: 0 0 40px #efcfff;
     }
 
+    /* ⭐ FLOATING PAY BUTTON */
+    .floating-pay {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: linear-gradient(90deg, #a24dff, #df7bff);
+      padding: 16px 28px;
+      border-radius: 14px;
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 0 35px #d7a6ff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: .25s;
+      z-index: 999;
+    }
+
+    .floating-pay:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 55px #efcfff;
+    }
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -189,6 +215,11 @@
 </head>
 
 <body>
+
+<!-- ⭐ 3 LAYER GALAXY BACKGROUND -->
+<div class="stars"></div>
+<div class="stars2"></div>
+<div class="stars3"></div>
 
 <header>
   <h1>BuzzBuzzAway</h1>
@@ -205,12 +236,17 @@
 <div class="container">
   <div class="products">
 
-<div class="product-card">
-  <h3>Geek Bar Pulse X</h3>
-  <img src="Geekbar_Pulse_X_25000_Disposable_Vape_Pick_10.webp" class="product-image">
-  <a href="options.html" class="purchase-button">Pay Now</a>
+    <div class="product-card">
+      <h3>Geek Bar Pulse X</h3>
+      <img src="Geekbar_Pulse_X_25000_Disposable_Vape_Pick_10.webp" class="product-image">
+      <a href="options.html" class="purchase-button">Pay Now</a>
+    </div>
+
+  </div>
 </div>
-</div>
+
+<!-- ⭐ FLOATING PANEL PAY BUTTON -->
+<a href="options.html" class="floating-pay">Pay Now</a>
 
 <footer>
   © 2025 BuzzBuzzAway. All Rights Reserved.
