@@ -3,52 +3,129 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Abandoned Tweaks</title>
+  <title>BuzzBuzzAway</title>
 
   <style>
+    /* 🌌 GALAXY BACKGROUND (pure CSS, no images) */
     body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #f2f2f2;
       margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at center, #2a0066, #0a001f 70%, #000 100%);
+      color: #fff;
       overflow-x: hidden;
     }
 
+    /* ★ Stars (no external image used) */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background: transparent;
+      box-shadow:
+        10vw 10vh 2px #ffffff,
+        20vw 70vh 2px #ffffff,
+        40vw 30vh 2px #ffffff,
+        60vw 90vh 2px #ffffff,
+        80vw 20vh 2px #ffffff,
+        50vw 50vh 2px #ffffff,
+        30vw 80vh 2px #ffffff,
+        70vw 40vh 2px #ffffff;
+      animation: stars 60s linear infinite;
+    }
+
+    @keyframes stars {
+      from { transform: translateY(0); }
+      to { transform: translateY(-2000px); }
+    }
+
+    /* 🐝 CARTOON TITLE (replaces the image) */
     header {
       text-align: center;
-      padding: 1rem;
+      padding: 20px 0 5px 0;
+      margin-top: 10px;
     }
 
     header h1 {
-      font-size: 2.5rem;
-      background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-      background-size: 400% 400%;
+      font-size: 4rem;
+      font-weight: 900;
+      text-transform: none;
+      margin: 0;
+
+      /* Logo-style gradients */
+      background: linear-gradient(
+        90deg,
+        #ffcc33,
+        #ff9900,
+        #ff8800,
+        #ffc000,
+        #00c8ff,
+        #0096ff
+      );
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: rainbow 8s linear infinite;
+
+      /* Thick brown outline like the real logo */
+      text-shadow:
+        4px 4px 0 #5a2d00,
+        7px 7px 12px rgba(255, 200, 0, 0.5);
+
+      /* Glow */
+      filter: drop-shadow(0 0 18px #ffd760);
     }
 
-    @keyframes rainbow {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 400% 50%; }
+    /* Honey drip line under the text */
+    .drip {
+      width: 260px;
+      height: 18px;
+      background: #ffb300;
+      margin: 0 auto;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 0 18px #ffcc33;
+      position: relative;
     }
 
+    .drip::after {
+      content: "";
+      position: absolute;
+      left: 50px;
+      bottom: -20px;
+      width: 35px;
+      height: 35px;
+      background: #ffb300;
+      border-radius: 0 0 50% 50%;
+      box-shadow: 0 0 12px #ffcc33;
+    }
+
+    /* Navigation */
     nav {
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      gap: 1.2rem;
       padding: 1rem;
     }
 
     nav a {
+      background: rgba(110, 30, 200, 0.4);
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
       color: #fff;
       text-decoration: none;
-      background: #222;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
       font-weight: bold;
+      transition: .25s;
+      box-shadow: 0 0 15px #cfaaff;
     }
 
+    nav a:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 30px #f0ddff;
+    }
+
+    /* Product container */
     .container {
       max-width: 1200px;
       margin: auto;
@@ -61,37 +138,52 @@
       gap: 1.5rem;
     }
 
+    /* Product card with glow */
     .product-card {
-      background: #222;
-      border-radius: 8px;
-      padding: 1rem;
+      background: rgba(40, 0, 80, 0.5);
+      padding: 1.2rem;
+      border-radius: 14px;
       text-align: center;
-      box-shadow: 0 0 15px rgba(0,255,255,0.2);
+      box-shadow: 0 0 28px #b565ff;
+      border: 2px solid #d5a8ff;
+      backdrop-filter: blur(6px);
+      transition: .3s;
+    }
+
+    .product-card:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 45px #e1c2ff;
     }
 
     .product-image {
       width: 100%;
-      max-width: 350px;
-      border-radius: 8px;
-      margin: 1rem auto;
-      display: block;
+      border-radius: 12px;
+      box-shadow: 0 0 22px #d7a6ff;
     }
 
     .purchase-button {
       display: inline-block;
-      margin-top: 15px;
       padding: 12px 24px;
-      background: #007bff;
-      color: #fff;
+      background: linear-gradient(90deg, #a24dff, #df7bff);
+      border-radius: 10px;
+      color: white;
       text-decoration: none;
-      border-radius: 8px;
       font-weight: bold;
+      margin-top: 15px;
+      box-shadow: 0 0 25px #d7a6ff;
+      transition: 0.25s;
+    }
+
+    .purchase-button:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 40px #efcfff;
     }
 
     footer {
       text-align: center;
       padding: 1rem;
-      color: #aaa;
+      color: #ddcaff;
+      text-shadow: 0 0 10px #b184ff;
     }
   </style>
 </head>
@@ -99,14 +191,15 @@
 <body>
 
 <header>
-  <h1>Abandoned Tweaks</h1>
+  <h1>BuzzBuzzAway</h1>
+  <div class="drip"></div>
 </header>
 
 <nav>
-  <a href="https://discord.gg/qyZEhex3HJ" target="_blank">Discord</a>
+  <a href="https://discord.gg/qyZEhex3HJ">Discord</a>
   <a href="options.html">Options</a>
-  <a href="https://www.tiktok.com/@abandonedtweaks.xyz" target="_blank">TikTok</a>
-  <a href="https://abandonedtweaks.xyz/reviews.html" target="_blank">Reviews</a>
+  <a href="https://www.tiktok.com/@abandonedtweaks.xyz">TikTok</a>
+  <a href="https://abandonedtweaks.xyz/reviews.html">Reviews</a>
 </nav>
 
 <div class="container">
@@ -114,18 +207,7 @@
 
     <div class="product-card">
       <h3>Geek Bar Pulse X</h3>
-      <div class="description">
-        Pick 10 – Select your preferred options on the next page.
-      </div>
-
-      <!-- IMAGE REPLACEMENT -->
-      <img
-        src="Geekbar_Pulse_X_25000_Disposable_Vape_Pick_10.webp"
-        alt="Geek Bar Pulse X"
-        class="product-image"
-      />
-
-      <!-- BUTTON TO NEXT PAGE -->
+      <img src="Geekbar_Pulse_X_25000_Disposable_Vape_Pick_10.webp" class="product-image">
       <a href="options.html" class="purchase-button">Choose Options</a>
     </div>
 
@@ -133,7 +215,7 @@
 </div>
 
 <footer>
-  &copy; 2025 Abandoned Tweaks. All rights reserved.
+  © 2025 BuzzBuzzAway. All Rights Reserved.
 </footer>
 
 </body>
