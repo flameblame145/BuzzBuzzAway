@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Abandoned Tweaks</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 1rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow 8s linear infinite;
+    }
+
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 400% 50%; }
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      background: #222;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: #222;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,255,255,0.2);
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .price {
+      color: #ccc;
+    }
+
+    .description {
+      font-size: 0.9rem;
+      color: #bbb;
+      margin-bottom: 1rem;
+    }
+
+    iframe {
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    .purchase-button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #aaa;
+    }
+
+    /* Background stars */
+    .starry-background {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 3s infinite;
+    }
+
+    @keyframes twinkle {
+      50% { opacity: 0.2; }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="starry-background" id="stars"></div>
+
+<header>
+  <h1>Abandoned Tweaks</h1>
+</header>
+
+<nav>
+  <a href="https://discord.gg/qyZEhex3HJ" target="_blank">Discord</a>
+  <a href="#">Purchase</a>
+  <a href="https://www.tiktok.com/@abandonedtweaks.xyz" target="_blank">TikTok</a>
+  <a href="https://abandonedtweaks.xyz/reviews.html" target="_blank">Reviews</a>
+</nav>
+
+<div class="container">
+  <div class="products">
+
+    <!-- Geek Bar Pulse X -->
+    <div class="product-card">
+      <h3>Geek Bar Pulse X</h3>
+      <div class="price">$19.99</div>
+      <div class="description">
+        Premium disposable vape with bold flavor, long battery life,
+        and smooth performance.
+      </div>
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      <a href="#" class="purchase-button">🛒 Purchase 🛒</a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 Abandoned Tweaks. All rights reserved.
+</footer>
+
+<script>
+  function createStar() {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.width = star.style.height = Math.random() * 3 + 1 + 'px';
+    star.style.top = Math.random() * 100 + 'vh';
+    star.style.left = Math.random() * 100 + 'vw';
+    document.getElementById('stars').appendChild(star);
+  }
+  for (let i = 0; i < 80; i++) createStar();
+</script>
+
+</body>
+</html>
