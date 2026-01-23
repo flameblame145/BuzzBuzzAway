@@ -2,158 +2,188 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Secured Checkout – verified</title>
+<title>CashApp Checkout – Eye Candy</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
 /* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", system-ui, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/* GALAXY BACKGROUND */
+/* BODY BACKGROUND */
 body {
   min-height: 100vh;
-  background: radial-gradient(circle at top, #2a003f, #050010 70%);
+  background: radial-gradient(circle at 30% 30%, #2a003f, #050010 85%);
   overflow: hidden;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
-/* STARS */
-body::before {
-  content: "";
+/* PANEL NEBULA GLOW */
+.checkout::before {
+  content: '';
   position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(1px 1px at 20% 30%, white, transparent),
-    radial-gradient(1px 1px at 70% 60%, white, transparent),
-    radial-gradient(1px 1px at 40% 80%, white, transparent),
-    radial-gradient(1px 1px at 90% 20%, white, transparent);
-  animation: twinkle 6s infinite alternate;
-  opacity: 0.8;
+  top: -30px;
+  left: -30px;
+  right: -30px;
+  bottom: -30px;
+  background: radial-gradient(circle, rgba(102,0,255,0.15), rgba(0,255,128,0.05));
+  filter: blur(80px);
+  z-index: -1;
+  border-radius: 20px;
 }
 
-@keyframes twinkle {
-  from { opacity: 0.4; }
-  to { opacity: 0.9; }
-}
-
-/* FLOATING CHECKOUT CARD */
+/* PANEL */
 .checkout {
   position: relative;
-  width: 360px;
-  padding: 28px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow:
-    0 0 40px rgba(180, 80, 255, 0.35),
-    inset 0 0 20px rgba(255,255,255,0.05);
-  animation: float 5s ease-in-out infinite;
+  width: 380px;
+  padding: 40px 28px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 0 60px rgba(102,0,255,0.5), inset 0 0 30px rgba(255,255,255,0.1);
+  animation: float 4s ease-in-out infinite;
   z-index: 2;
+  text-align: center;
+  color: white;
+}
+
+/* FLOAT ANIMATION */
+@keyframes float {
+  0%,100% {transform: translateY(0);}
+  50% {transform: translateY(-15px);}
 }
 
 /* HEADER */
 .checkout h1 {
-  font-size: 1.4rem;
-  color: #ffffff;
+  font-size: 1.7rem;
   margin-bottom: 6px;
-  text-align: center;
 }
-
 .checkout p.sub {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  margin-bottom: 24px;
   color: #cbb6ff;
-  text-align: center;
-  margin-bottom: 22px;
 }
 
-/* PRODUCT */
-.product {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 18px;
-  color: #fff;
-}
-
-.product span {
-  font-size: 0.95rem;
-}
-
-.price {
+/* CASHAPP TEXT */
+.cashapp-text {
+  font-size: 3rem;
   font-weight: bold;
-  color: #9dfcff;
+  color: #00ff00;
+  margin-bottom: 20px;
+  animation: neonGlow 1.2s ease-in-out infinite alternate;
+  text-shadow:
+    0 0 10px #00ff00,
+    0 0 20px #00ff00,
+    0 0 30px #00ff00,
+    0 0 50px #00ff00,
+    0 0 80px #00ff00;
 }
-
-/* INPUT LABEL */
-label {
-  font-size: 0.7rem;
-  color: #cdbdff;
-  display: block;
-  margin-top: 12px;
-  margin-bottom: 4px;
+@keyframes neonGlow {
+  0% {text-shadow: 0 0 10px #00ff00,0 0 20px #00ff00,0 0 30px #00ff00,0 0 50px #00ff00;}
+  50% {text-shadow: 0 0 20px #00ff00,0 0 40px #00ff00,0 0 60px #00ff00,0 0 100px #00ff00;}
+  100% {text-shadow: 0 0 10px #00ff00,0 0 20px #00ff00,0 0 30px #00ff00,0 0 50px #00ff00;}
 }
 
 /* INPUT FIELD */
+label {
+  font-size: 0.75rem;
+  color: #cdbdff;
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
 input {
   width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background: rgba(255,255,255,0.12);
-  color: white;
-}
-
-/* PAY BUTTON */
-button {
-  margin-top: 22px;
-  width: 100%;
-  padding: 12px;
+  padding: 14px;
   border-radius: 12px;
   border: none;
+  outline: none;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  text-align: center;
+  font-size: 1.1rem;
+  transition: 0.3s;
+}
+input:hover, input:focus {
+  background: rgba(0,255,128,0.3);
+  box-shadow: 0 0 20px rgba(0,255,128,0.7);
+}
+
+/* BUTTON */
+button {
+  margin-top: 24px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  border: none;
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: #050010;
   background: linear-gradient(135deg, #a855f7, #67e8f9);
-  box-shadow: 0 0 25px rgba(170, 100, 255, 0.6);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 40px rgba(170,100,255,0.7);
+  transition: 0.3s;
 }
-
 button:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 35px rgba(170, 100, 255, 0.9);
+  transform: scale(1.08);
+  box-shadow: 0 0 60px rgba(170,100,255,1);
 }
 
-/* FOOTER NOTE */
+/* FOOTER */
 .note {
-  margin-top: 14px;
+  margin-top: 16px;
   font-size: 0.65rem;
   text-align: center;
   color: #a99bff;
 }
+
+/* SHOOTING STARS */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(white, rgba(255,255,255,0));
+  top: -100px;
+  opacity: 0.8;
+  animation: shoot 2s linear infinite;
+  z-index: 0;
+}
+@keyframes shoot {
+  0% {transform: translateX(0) translateY(0) rotate(45deg); opacity:1;}
+  100% {transform: translateX(1200px) translateY(1200px) rotate(45deg); opacity:0;}
+}
+
+/* MULTIPLE STARS POSITIONS */
+.star:nth-child(1) { left: 5%; animation-delay:0s; }
+.star:nth-child(2) { left: 20%; animation-delay:1s; }
+.star:nth-child(3) { left: 40%; animation-delay:1.5s; }
+.star:nth-child(4) { left: 60%; animation-delay:0.5s; }
+.star:nth-child(5) { left: 80%; animation-delay:2s; }
+
 </style>
 </head>
-
 <body>
+
+<!-- SHOOTING STARS -->
+<div class="star"></div>
+<div class="star"></div>
+<div class="star"></div>
+<div class="star"></div>
+<div class="star"></div>
 
 <div class="checkout">
   <h1>Secured Checkout</h1>
   <p class="sub">Secured Checkout – verified ✅</p>
 
-  <div class="product">
-    <span>Pulse X Device</span>
-    <span class="price">$37.99</span>
-  </div>
+  <div class="cashapp-text">CashApp</div>
 
-  <!-- CUSTOMER CHOOSES AMOUNT -->
   <label>Enter Amount to Pay ($)</label>
   <input id="amount" type="number" min="1" placeholder="Enter amount">
 
@@ -167,16 +197,12 @@ button:hover {
 <script>
 function payCashApp() {
   let amount = document.getElementById("amount").value;
-
   if (!amount || amount <= 0) {
     alert("Please enter a valid amount.");
     return;
   }
-
-  // Redirect to your CashApp
   window.location.href = "https://cash.app/$trazeymax/" + amount;
 }
 </script>
-
 </body>
 </html>
