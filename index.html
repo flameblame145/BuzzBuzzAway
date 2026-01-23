@@ -1,256 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BuzzBuzzAway</title>
+<meta charset="UTF-8">
+<title>Secured Checkout – verified</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    /* 🌌 FIXED GALAXY BACKGROUND */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: radial-gradient(circle at center, #280060, #0b0020 70%, #000 100%);
-      color: #fff;
-      overflow-x: hidden;
-      position: relative;
-    }
+<style>
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
 
-    /* ⭐ CLEAN, INFINITE STAR LAYERS */
-    .stars, .stars2, .stars3 {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-repeat: repeat;
-      background-position: 0 0;
-      z-index: -1;
-      pointer-events: none;
-    }
+/* GALAXY BACKGROUND */
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #2a003f, #050010 70%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    /* far stars */
-    .stars {
-      background-image:
-        radial-gradient(2px 2px at 20% 20%, white, transparent),
-        radial-gradient(2px 2px at 80% 40%, white, transparent),
-        radial-gradient(2px 2px at 50% 60%, white, transparent),
-        radial-gradient(2px 2px at 30% 80%, white, transparent);
-      animation: moveStars 80s linear infinite;
-    }
+/* STARS */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, white, transparent),
+    radial-gradient(1px 1px at 70% 60%, white, transparent),
+    radial-gradient(1px 1px at 40% 80%, white, transparent),
+    radial-gradient(1px 1px at 90% 20%, white, transparent);
+  animation: twinkle 6s infinite alternate;
+  opacity: 0.8;
+}
 
-    /* mid stars */
-    .stars2 {
-      background-image:
-        radial-gradient(3px 3px at 10% 70%, white, transparent),
-        radial-gradient(3px 3px at 60% 20%, white, transparent),
-        radial-gradient(3px 3px at 90% 50%, white, transparent);
-      opacity: 0.7;
-      animation: moveStars 120s linear infinite;
-    }
+@keyframes twinkle {
+  from { opacity: 0.4; }
+  to { opacity: 0.9; }
+}
 
-    /* close bright stars */
-    .stars3 {
-      background-image:
-        radial-gradient(4px 4px at 40% 30%, white, transparent),
-        radial-gradient(4px 4px at 70% 90%, white, transparent);
-      opacity: 0.4;
-      animation: moveStars 160s linear infinite;
-    }
+/* FLOATING CHECKOUT CARD */
+.checkout {
+  position: relative;
+  width: 360px;
+  padding: 28px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 0 40px rgba(180, 80, 255, 0.35),
+    inset 0 0 20px rgba(255,255,255,0.05);
+  animation: float 5s ease-in-out infinite;
+  z-index: 2;
+}
 
-    @keyframes moveStars {
-      from { background-position: 0 0; }
-      to { background-position: 0 2000px; }
-    }
+/* HEADER */
+.checkout h1 {
+  font-size: 1.4rem;
+  color: #ffffff;
+  margin-bottom: 6px;
+  text-align: center;
+}
 
-    /* 🐝 CARTOON TITLE */
-    header {
-      text-align: center;
-      padding: 20px 0 5px 0;
-      margin-top: 10px;
-    }
+.checkout p.sub {
+  font-size: 0.8rem;
+  color: #cbb6ff;
+  text-align: center;
+  margin-bottom: 22px;
+}
 
-    header h1 {
-      font-size: 4rem;
-      font-weight: 900;
-      background: linear-gradient(90deg, #ffcc33, #ff9900, #ff8800, #ffc000, #00c8ff, #0096ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow:
-        4px 4px 0 #5a2d00,
-        7px 7px 12px rgba(255, 200, 0, 0.5);
-      filter: drop-shadow(0 0 18px #ffd760);
-      margin: 0;
-    }
+/* PRODUCT */
+.product {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  color: #fff;
+}
 
-    /* Honey drip */
-    .drip {
-      width: 260px;
-      height: 18px;
-      background: #ffb300;
-      margin: 0 auto;
-      border-radius: 0 0 20px 20px;
-      box-shadow: 0 0 18px #ffcc33;
-      position: relative;
-    }
+.product span {
+  font-size: 0.95rem;
+}
 
-    .drip::after {
-      content: "";
-      position: absolute;
-      left: 50px;
-      bottom: -20px;
-      width: 35px;
-      height: 35px;
-      background: #ffb300;
-      border-radius: 0 0 50% 50%;
-      box-shadow: 0 0 12px #ffcc33;
-    }
+.price {
+  font-weight: bold;
+  color: #9dfcff;
+}
 
-    /* Navigation */
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 1.2rem;
-      padding: 1rem;
-    }
+/* INPUT LABEL */
+label {
+  font-size: 0.7rem;
+  color: #cdbdff;
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
 
-    nav a {
-      background: rgba(110, 30, 200, 0.4);
-      padding: 0.6rem 1.2rem;
-      border-radius: 10px;
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      transition: .25s;
-      box-shadow: 0 0 15px #cfaaff;
-    }
+/* INPUT FIELD */
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.12);
+  color: white;
+}
 
-    nav a:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 30px #f0ddff;
-    }
+/* PAY BUTTON */
+button {
+  margin-top: 22px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #050010;
+  background: linear-gradient(135deg, #a855f7, #67e8f9);
+  box-shadow: 0 0 25px rgba(170, 100, 255, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-    /* Product layout */
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 2rem;
-    }
+button:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 35px rgba(170, 100, 255, 0.9);
+}
 
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .product-card {
-      background: rgba(40, 0, 80, 0.5);
-      padding: 1.2rem;
-      border-radius: 14px;
-      text-align: center;
-      box-shadow: 0 0 28px #b565ff;
-      border: 2px solid #d5a8ff;
-      backdrop-filter: blur(6px);
-      transition: .3s;
-    }
-
-    .product-card:hover {
-      transform: scale(1.04);
-      box-shadow: 0 0 45px #e1c2ff;
-    }
-
-    .product-image {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 22px #d7a6ff;
-    }
-
-    .purchase-button {
-      display: inline-block;
-      padding: 12px 24px;
-      background: linear-gradient(90deg, #a24dff, #df7bff);
-      border-radius: 10px;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 15px;
-      box-shadow: 0 0 25px #d7a6ff;
-      transition: 0.25s;
-    }
-
-    .purchase-button:hover {
-      transform: scale(1.06);
-      box-shadow: 0 0 40px #efcfff;
-    }
-
-    /* ⭐ FLOATING PAY BUTTON */
-    .floating-pay {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: linear-gradient(90deg, #a24dff, #df7bff);
-      padding: 16px 28px;
-      border-radius: 14px;
-      color: #fff;
-      font-weight: bold;
-      box-shadow: 0 0 35px #d7a6ff;
-      text-decoration: none;
-      font-size: 1.2rem;
-      transition: .25s;
-      z-index: 999;
-    }
-
-    .floating-pay:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 55px #efcfff;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      color: #ddcaff;
-      text-shadow: 0 0 10px #b184ff;
-    }
-  </style>
+/* FOOTER NOTE */
+.note {
+  margin-top: 14px;
+  font-size: 0.65rem;
+  text-align: center;
+  color: #a99bff;
+}
+</style>
 </head>
 
 <body>
 
-<!-- ⭐ 3 LAYER GALAXY BACKGROUND -->
-<div class="stars"></div>
-<div class="stars2"></div>
-<div class="stars3"></div>
+<div class="checkout">
+  <h1>Secured Checkout</h1>
+  <p class="sub">Secured Checkout – verified ✅</p>
 
-<header>
-  <h1>BuzzBuzzAway</h1>
-  <div class="drip"></div>
-</header>
+  <div class="product">
+    <span>Pulse X Device</span>
+    <span class="price">$37.99</span>
+  </div>
 
-<nav>
-  <a href="https://discord.gg/qyZEhex3HJ">Discord</a>
-  <a href="options.html">Options</a>
-  <a href="https://www.tiktok.com/@abandonedtweaks.xyz">TikTok</a>
-  <a href="https://abandonedtweaks.xyz/reviews.html">Reviews</a>
-</nav>
+  <!-- CUSTOMER CHOOSES AMOUNT -->
+  <label>Enter Amount to Pay ($)</label>
+  <input id="amount" type="number" min="1" placeholder="Enter amount">
 
-<div class="container">
-  <div class="products">
+  <button onclick="payCashApp()">Pay with CashApp</button>
 
-    <div class="product-card">
-      <h3>Geek Bar Pulse X</h3>
-      <img src="Geekbar_Pulse_X_25000_Disposable_Vape_Pick_10.webp" class="product-image">
-      <a href="options.html" class="purchase-button">Pay Now</a>
-    </div>
-
+  <div class="note">
+    BUZZBUZZAWAY ALL RIGHTS RESERVED
   </div>
 </div>
 
-<!-- ⭐ FLOATING PANEL PAY BUTTON -->
-<a href="options.html" class="floating-pay">Pay Now</a>
+<script>
+function payCashApp() {
+  let amount = document.getElementById("amount").value;
 
-<footer>
-  © 2025 BuzzBuzzAway. All Rights Reserved.
-</footer>
+  if (!amount || amount <= 0) {
+    alert("Please enter a valid amount.");
+    return;
+  }
+
+  // Redirect to your CashApp
+  window.location.href = "https://cash.app/pay/trazeymax/" + amount;
+}
+</script>
 
 </body>
 </html>
