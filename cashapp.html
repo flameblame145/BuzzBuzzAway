@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Secured Checkout – verified</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* GALAXY BACKGROUND */
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #2a003f, #050010 70%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* STARS */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, white, transparent),
+    radial-gradient(1px 1px at 70% 60%, white, transparent),
+    radial-gradient(1px 1px at 40% 80%, white, transparent),
+    radial-gradient(1px 1px at 90% 20%, white, transparent);
+  animation: twinkle 6s infinite alternate;
+  opacity: 0.8;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.4; }
+  to { opacity: 0.9; }
+}
+
+/* FLOATING CHECKOUT CARD */
+.checkout {
+  position: relative;
+  width: 360px;
+  padding: 28px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 0 40px rgba(180, 80, 255, 0.35),
+    inset 0 0 20px rgba(255,255,255,0.05);
+  animation: float 5s ease-in-out infinite;
+  z-index: 2;
+}
+
+/* HEADER */
+.checkout h1 {
+  font-size: 1.4rem;
+  color: #ffffff;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.checkout p.sub {
+  font-size: 0.8rem;
+  color: #cbb6ff;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+/* PRODUCT */
+.product {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  color: #fff;
+}
+
+.product span {
+  font-size: 0.95rem;
+}
+
+.price {
+  font-weight: bold;
+  color: #9dfcff;
+}
+
+/* INPUT LABEL */
+label {
+  font-size: 0.7rem;
+  color: #cdbdff;
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+/* INPUT FIELD */
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.12);
+  color: white;
+}
+
+/* PAY BUTTON */
+button {
+  margin-top: 22px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #050010;
+  background: linear-gradient(135deg, #a855f7, #67e8f9);
+  box-shadow: 0 0 25px rgba(170, 100, 255, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 35px rgba(170, 100, 255, 0.9);
+}
+
+/* FOOTER NOTE */
+.note {
+  margin-top: 14px;
+  font-size: 0.65rem;
+  text-align: center;
+  color: #a99bff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="checkout">
+  <h1>Secured Checkout</h1>
+  <p class="sub">Secured Checkout – verified ✅</p>
+
+  <div class="product">
+    <span>Pulse X Device</span>
+    <span class="price">$37.99</span>
+  </div>
+
+  <!-- CUSTOMER CHOOSES AMOUNT -->
+  <label>Enter Amount to Pay ($)</label>
+  <input id="amount" type="number" min="1" placeholder="Enter amount">
+
+  <button onclick="payCashApp()">Pay with CashApp</button>
+
+  <div class="note">
+    BUZZBUZZAWAY ALL RIGHTS RESERVED
+  </div>
+</div>
+
+<script>
+function payCashApp() {
+  let amount = document.getElementById("amount").value;
+
+  if (!amount || amount <= 0) {
+    alert("Please enter a valid amount.");
+    return;
+  }
+
+  // Redirect to your CashApp
+  window.location.href = "https://cash.app/$trazeymax/" + amount;
+}
+</script>
+
+</body>
+</html>
