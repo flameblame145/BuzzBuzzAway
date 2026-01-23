@@ -1,149 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>BuzzBuzzAway – Enter</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BuzzBuzzAway – Start</title>
 
 <style>
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui;
+  }
 
-/* PURPLE GALAXY BACKGROUND */
-body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(circle at 20% 20%, #6a0dad, #240046 70%, #0a0018);
-  overflow: hidden;
-  position: relative;
-  cursor: pointer;
-}
+  body {
+    height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(circle at 40% 20%, #7a1aff, #1e0038 70%);
+    position: relative;
+    cursor: pointer;
+  }
 
-/* NEBULA GLOW OVERLAY */
-body::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, rgba(200,0,255,0.25), rgba(80,0,130,0.2), rgba(0,0,0,0));
-  filter: blur(150px);
-  pointer-events: none;
-  z-index: 0;
-}
+  /* ⭐ Shooting Stars */
+  .star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    animation: starMove 4s linear infinite;
+  }
 
-/* CLICK ANYWHERE TEXT */
-#enterText {
-  position: absolute;
-  font-size: 2.2rem;
-  color: white;
-  text-shadow: 0 0 25px #d48cff, 0 0 45px #b66aff;
-  animation: pulse 2s infinite;
-  z-index: 2;
-  user-select: none;
-}
+  @keyframes starMove {
+    from { transform: translate(0, 0); opacity: 1; }
+    to { transform: translate(-250px, 300px); opacity: 0; }
+  }
 
-@keyframes pulse {
-  0% {opacity: 0.4;}
-  50% {opacity: 1;}
-  100% {opacity: 0.4;}
-}
+  /* ✨ Click Text */
+  #clickText {
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+    text-align: center;
+    color: #ffffffd8;
+    font-size: 26px;
+    letter-spacing: 2px;
+    animation: pulse 1.4s infinite alternate ease-in-out;
+    transition: opacity 0.6s ease-out;
+  }
 
-/* MENU PANEL CONTAINER */
-.menu {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 0;
-  pointer-events: none;
-  transition: 1.3s;
-  z-index: 3;
-}
+  @keyframes pulse {
+    from { opacity: 1; }
+    to { opacity: 0.35; }
+  }
 
-/* FLOATING PANELS */
-.panel {
-  width: 260px;
-  margin: 15px auto;
-  padding: 18px;
-  text-align: center;
-  font-size: 1.2rem;
-  color: white;
-  border-radius: 14px;
-  text-decoration: none;
-  display: block;
+  /* 🌌 Floating Panels */
+  .panel {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(30px);
+    width: 300px;
+    padding: 20px 0;
+    border-radius: 20px;
+    background: rgba(110, 0, 180, 0.35);
+    box-shadow: 0 0 25px 10px #b366ff70;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    opacity: 0;
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
 
-  background: rgba(255,255,255,0.07);
-  backdrop-filter: blur(14px);
+  .panel img {
+    width: 34px;
+    height: 34px;
+  }
 
-  box-shadow:
-    0 0 25px rgba(170,100,255,0.7),
-    inset 0 0 20px rgba(255,255,255,0.05);
-
-  transition: 0.3s;
-  animation: float 4s ease-in-out infinite;
-}
-
-.panel:hover {
-  transform: scale(1.08);
-  box-shadow:
-    0 0 35px rgba(200,120,255,1),
-    inset 0 0 25px rgba(255,255,255,0.15);
-}
-
-@keyframes float {
-  0%,100% {transform: translateY(0);}
-  50% {transform: translateY(-12px);}
-}
-
-/* FADE OUT CLICK TEXT */
-.fadeOut {
-  animation: fadeAway 1s forwards;
-}
-
-@keyframes fadeAway {
-  0% {opacity: 1;}
-  100% {opacity: 0;}
-}
+  .panel span {
+    font-size: 22px;
+    color: white;
+    font-weight: 600;
+  }
 </style>
 </head>
+<body>
 
-<body onclick="startEnter()">
+<!-- ⭐ Random Shooting Stars -->
+<script>
+  for (let i = 0; i < 60; i++) {
+    const star = document.createElement("div");
+    star.classList.add("star");
+    star.style.top = Math.random() * window.innerHeight + "px";
+    star.style.left = Math.random() * window.innerWidth + "px";
+    star.style.animationDelay = Math.random() * 3 + "s";
+    document.body.appendChild(star);
+  }
+</script>
 
-<!-- CLICK TO ENTER TEXT -->
-<div id="enterText">Click Anywhere to Enter</div>
+<!-- ✨ Click Text -->
+<div id="clickText">Tap anywhere to enter</div>
 
-<!-- MENU OPTIONS -->
-<div id="menu" class="menu">
-  <a class="panel" href="mailto:onlyusingforselling@gmail.com">📩 Contact Us</a>
-  <a class="panel" href="https://discord.gg/en5Br2fKgx">💬 Join Discord</a>
-  <a class="panel" href="cashapp.html">💵 CashApp</a>
-  <a class="panel" href="paypal.html">💳 PayPal</a>
+<!-- 🌌 Discord Panel -->
+<div id="panel1" class="panel" style="top: 32%;">
+  <img src="https://cdn.worldvectorlogo.com/logos/discord-6.svg">
+  <span>Discord</span>
+</div>
+
+<!-- 🌌 CashApp Panel -->
+<div id="panel2" class="panel" style="top: 50%;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Square_Cash_app_logo.svg">
+  <span>CashApp</span>
 </div>
 
 <script>
-let started = false;
+  let clicked = false;
 
-function startEnter() {
-  if (started) return;
-  started = true;
+  document.body.addEventListener("click", () => {
+    if (clicked) return;
+    clicked = true;
 
-  document.body.style.cursor = "default";
+    const clickText = document.getElementById("clickText");
+    clickText.style.opacity = 0;
 
-  // Fade out click text
-  document.getElementById("enterText").classList.add("fadeOut");
+    // Fully remove text after fade-out
+    setTimeout(() => {
+      clickText.style.display = "none";
+    }, 650);
 
-  // Reveal the floating glowing panels
-  setTimeout(() => {
-    const menu = document.getElementById("menu");
-    menu.style.opacity = "1";
-    menu.style.pointerEvents = "all";
-  }, 500);
-}
+    // Fade in floating panels
+    const p1 = document.getElementById("panel1");
+    const p2 = document.getElementById("panel2");
+
+    setTimeout(() => {
+      p1.style.opacity = 1;
+      p1.style.transform = "translateX(-50%) translateY(0px)";
+
+      p2.style.opacity = 1;
+      p2.style.transform = "translateX(-50%) translateY(0px)";
+    }, 350);
+  });
+
+  // Button links
+  document.getElementById("panel1").addEventListener("click", (e) => {
+    e.stopPropagation();
+    window.location.href = "https://discord.gg/en5Br2fKgx";
+  });
+
+  document.getElementById("panel2").addEventListener("click", (e) => {
+    e.stopPropagation();
+    window.location.href = "cashapp.html";
+  });
 </script>
 
 </body>
