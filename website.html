@@ -2,181 +2,158 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CashApp Checkout – Eye Candy</title>
+<title>Secured Checkout – verified</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 /* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", system-ui, sans-serif;
 }
 
-/* BODY & COSMIC BACKGROUND */
+/* GALAXY BACKGROUND */
 body {
   min-height: 100vh;
-  background: radial-gradient(circle at 30% 30%, #2a003f, #050010 80%);
+  background: radial-gradient(circle at top, #2a003f, #050010 70%);
   overflow: hidden;
   display: flex;
-  justify-content: center;
   align-items: center;
-  position: relative;
+  justify-content: center;
 }
 
-/* GALAXY NEBULA GLOW */
-body::after {
-  content: '';
+/* STARS */
+body::before {
+  content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle, rgba(102,0,255,0.2), rgba(0,255,128,0.05));
-  filter: blur(120px);
-  z-index: 0;
-}
-
-/* SHOOTING STARS */
-.star {
-  position: absolute;
-  width: 2px;
-  height: 100px;
-  background: linear-gradient(white, rgba(255,255,255,0));
-  top: -100px;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, white, transparent),
+    radial-gradient(1px 1px at 70% 60%, white, transparent),
+    radial-gradient(1px 1px at 40% 80%, white, transparent),
+    radial-gradient(1px 1px at 90% 20%, white, transparent);
+  animation: twinkle 6s infinite alternate;
   opacity: 0.8;
-  animation: shoot 2s linear infinite;
-}
-@keyframes shoot {
-  0% {transform: translateX(0) translateY(0) rotate(45deg); opacity: 1;}
-  100% {transform: translateX(1200px) translateY(1200px) rotate(45deg); opacity: 0;}
 }
 
-/* PANEL */
+@keyframes twinkle {
+  from { opacity: 0.4; }
+  to { opacity: 0.9; }
+}
+
+/* FLOATING CHECKOUT CARD */
 .checkout {
   position: relative;
-  width: 400px;
-  padding: 40px 28px;
-  border-radius: 20px;
-  background: rgba(0,0,0,0.2);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.2);
-  box-shadow: 
-    0 0 60px rgba(102,0,255,0.5), 
-    inset 0 0 30px rgba(255,255,255,0.1);
-  animation: float 4s ease-in-out infinite;
+  width: 360px;
+  padding: 28px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 0 40px rgba(180, 80, 255, 0.35),
+    inset 0 0 20px rgba(255,255,255,0.05);
+  animation: float 5s ease-in-out infinite;
   z-index: 2;
-  text-align: center;
-  color: white;
-  overflow: hidden;
-}
-
-/* FLOAT ANIMATION */
-@keyframes float {
-  0%,100% {transform: translateY(0);}
-  50% {transform: translateY(-20px);}
 }
 
 /* HEADER */
 .checkout h1 {
-  font-size: 1.7rem;
+  font-size: 1.4rem;
   color: #ffffff;
   margin-bottom: 6px;
+  text-align: center;
 }
+
 .checkout p.sub {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #cbb6ff;
-  margin-bottom: 24px;
+  text-align: center;
+  margin-bottom: 22px;
 }
 
-/* CASHAPP TEXT */
-.cashapp-text {
-  font-size: 3rem;
+/* PRODUCT */
+.product {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  color: #fff;
+}
+
+.product span {
+  font-size: 0.95rem;
+}
+
+.price {
   font-weight: bold;
-  color: #00ff00;
-  margin-bottom: 20px;
-  animation: neonGlow 1.2s ease-in-out infinite alternate;
-  text-shadow: 
-    0 0 10px #00ff00,
-    0 0 20px #00ff00,
-    0 0 30px #00ff00,
-    0 0 50px #00ff00,
-    0 0 80px #00ff00;
+  color: #9dfcff;
 }
 
-@keyframes neonGlow {
-  0% {text-shadow: 0 0 10px #00ff00,0 0 20px #00ff00,0 0 30px #00ff00,0 0 50px #00ff00;}
-  50% {text-shadow: 0 0 20px #00ff00,0 0 40px #00ff00,0 0 60px #00ff00,0 0 100px #00ff00;}
-  100% {text-shadow: 0 0 10px #00ff00,0 0 20px #00ff00,0 0 30px #00ff00,0 0 50px #00ff00;}
-}
-
-/* INPUT FIELD */
+/* INPUT LABEL */
 label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #cdbdff;
   display: block;
   margin-top: 12px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
+
+/* INPUT FIELD */
 input {
   width: 100%;
-  padding: 14px;
-  border-radius: 12px;
+  padding: 10px;
+  border-radius: 10px;
   border: none;
   outline: none;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.12);
   color: white;
-  text-align: center;
-  font-size: 1.1rem;
-  transition: 0.3s;
-}
-input:hover, input:focus {
-  background: rgba(0,255,128,0.3);
-  box-shadow: 0 0 20px rgba(0,255,128,0.7);
 }
 
-/* BUTTON */
+/* PAY BUTTON */
 button {
-  margin-top: 24px;
+  margin-top: 22px;
   width: 100%;
-  padding: 16px;
-  border-radius: 16px;
+  padding: 12px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 600;
   color: #050010;
   background: linear-gradient(135deg, #a855f7, #67e8f9);
-  box-shadow: 0 0 40px rgba(170,100,255,0.7);
-  transition: 0.3s;
-}
-button:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 60px rgba(170,100,255,1);
+  box-shadow: 0 0 25px rgba(170, 100, 255, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* FOOTER */
+button:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 35px rgba(170, 100, 255, 0.9);
+}
+
+/* FOOTER NOTE */
 .note {
-  margin-top: 16px;
+  margin-top: 14px;
   font-size: 0.65rem;
   text-align: center;
   color: #a99bff;
 }
-
 </style>
 </head>
-<body>
 
-<!-- SHOOTING STARS -->
-<div class="star" style="left:5%; animation-delay:0s;"></div>
-<div class="star" style="left:20%; animation-delay:1s;"></div>
-<div class="star" style="left:40%; animation-delay:1.5s;"></div>
-<div class="star" style="left:60%; animation-delay:0.5s;"></div>
-<div class="star" style="left:80%; animation-delay:2s;"></div>
+<body>
 
 <div class="checkout">
   <h1>Secured Checkout</h1>
   <p class="sub">Secured Checkout – verified ✅</p>
 
-  <div class="cashapp-text">CashApp</div>
+  <div class="product">
+    <span>Pulse X Device</span>
+    <span class="price">$37.99</span>
+  </div>
 
+  <!-- CUSTOMER CHOOSES AMOUNT -->
   <label>Enter Amount to Pay ($)</label>
   <input id="amount" type="number" min="1" placeholder="Enter amount">
 
@@ -190,11 +167,14 @@ button:hover {
 <script>
 function payCashApp() {
   let amount = document.getElementById("amount").value;
+
   if (!amount || amount <= 0) {
     alert("Please enter a valid amount.");
     return;
   }
-  window.location.href = "https://cash.app/$trazeymax/" + amount;
+
+  // Redirect to your CashApp
+  window.location.href = "https://cash.app/pay/trazeymax/" + amount;
 }
 </script>
 
