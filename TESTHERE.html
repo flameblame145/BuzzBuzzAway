@@ -11,10 +11,9 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Orbitron", "Segoe UI", sans-serif; /* Futuristic Font */
+        font-family: "Orbitron", "Segoe UI", sans-serif;
     }
 
-    /* Import futuristic font */
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap');
 
     body {
@@ -22,13 +21,15 @@
         width: 100vw;
         overflow: hidden;
         cursor: pointer;
-        background: url("https://i.ibb.co/0qvN4v6/galaxy-deep-purple.jpg") center/cover no-repeat fixed;
+
+        /* FIXED WORKING GALAXY BACKGROUND */
+        background: url("https://i.ibb.co/8xJbw7V/purple-galaxy.jpg") center/cover no-repeat fixed;
+
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    /* --- CLICK TO START TEXT --- */
     #enterText {
         position: absolute;
         top: 20%;
@@ -50,7 +51,6 @@
         pointer-events: none;
     }
 
-    /* --- MENU --- */
     #menu {
         opacity: 0;
         transition: opacity 1s ease;
@@ -88,7 +88,6 @@
         text-shadow: 0 0 25px #d7a2ff;
     }
 
-    /* Discount code bar */
     #discount {
         position: absolute;
         bottom: 20px;
@@ -104,10 +103,8 @@
 
 <body onclick="startEnter()">
 
-<!-- CLICK ANYWHERE TEXT -->
 <div id="enterText">Click anywhere to begin</div>
 
-<!-- MENU -->
 <div id="menu">
     <div class="btnWrapper"><button class="menuBtn" onclick="go('discord')">Discord</button></div>
     <div class="btnWrapper"><button class="menuBtn" onclick="go('cashapp')">CashApp</button></div>
