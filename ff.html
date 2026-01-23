@@ -36,8 +36,8 @@
     to { transform: translate(-250px, 300px); opacity: 0; }
   }
 
-  /* ✨ Click Text */
-  #clickText {
+  /* ✨ Enter Text */
+  #enterText {
     position: absolute;
     bottom: 60px;
     width: 100%;
@@ -54,7 +54,12 @@
     to { opacity: 0.35; }
   }
 
-  /* 🌌 Floating Panels */
+  /* Fade out */
+  .fadeOut {
+    opacity: 0 !important;
+  }
+
+  /* 🌌 Panels */
   .panel {
     position: absolute;
     left: 50%;
@@ -69,7 +74,7 @@
     align-items: center;
     gap: 14px;
     opacity: 0;
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     cursor: pointer;
   }
 
@@ -83,11 +88,18 @@
     color: white;
     font-weight: 600;
   }
+
+  /* Menu container */
+  #menu {
+    opacity: 0;
+    pointer-events: none;
+  }
 </style>
 </head>
-<body>
 
-<!-- ⭐ Random Shooting Stars -->
+<body onclick="startEnter()">
+
+<!-- ⭐ Shooting Stars -->
 <script>
   for (let i = 0; i < 60; i++) {
     const star = document.createElement("div");
@@ -99,58 +111,60 @@
   }
 </script>
 
-<!-- ✨ Click Text -->
-<div id="clickText">Tap anywhere to enter</div>
+<!-- ✨ Enter Text -->
+<div id="enterText">Tap anywhere to enter</div>
 
-<!-- 🌌 Discord Panel -->
-<div id="panel1" class="panel" style="top: 32%;">
-  <img src="https://cdn.worldvectorlogo.com/logos/discord-6.svg">
-  <span>Discord</span>
-</div>
+<!-- 🌌 MENU -->
+<div id="menu">
 
-<!-- 🌌 CashApp Panel -->
-<div id="panel2" class="panel" style="top: 50%;">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Square_Cash_app_logo.svg">
-  <span>CashApp</span>
+  <div id="panel1" class="panel" style="top: 32%;">
+    <img src="https://cdn.worldvectorlogo.com/logos/discord-6.svg">
+    <span>Discord</span>
+  </div>
+
+  <div id="panel2" class="panel" style="top: 50%;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Square_Cash_app_logo.svg">
+    <span>CashApp</span>
+  </div>
+
 </div>
 
 <script>
-  let clicked = false;
+let started = false;
 
-  document.body.addEventListener("click", () => {
-    if (clicked) return;
-    clicked = true;
+function startEnter() {
+  if (started) return;
+  started = true;
 
-    const clickText = document.getElementById("clickText");
-    clickText.style.opacity = 0;
+  document.body.style.cursor = "default";
 
-    // Fully remove after fade-out
-    setTimeout(() => {
-      clickText.style.display = "none";
-    }, 650);
+  // Fade out enter text
+  document.getElementById("enterText").classList.add("fadeOut");
 
-    const p1 = document.getElementById("panel1");
-    const p2 = document.getElementById("panel2");
+  // Reveal menu
+  setTimeout(() => {
+    const menu = document.getElementById("menu");
+    menu.style.opacity = "1";
+    menu.style.pointerEvents = "all";
 
-    setTimeout(() => {
-      p1.style.opacity = 1;
-      p1.style.transform = "translateX(-50%) translateY(0px)";
+    document.getElementById("panel1").style.opacity = "1";
+    document.getElementById("panel1").style.transform = "translateX(-50%) translateY(0px)";
 
-      p2.style.opacity = 1;
-      p2.style.transform = "translateX(-50%) translateY(0px)";
-    }, 400);
-  });
+    document.getElementById("panel2").style.opacity = "1";
+    document.getElementById("panel2").style.transform = "translateX(-50%) translateY(0px)";
+  }, 600);
+}
 
-  // Button links
-  document.getElementById("panel1").addEventListener("click", (e) => {
-    e.stopPropagation();
-    window.location.href = "https://discord.gg/en5Br2fKgx";
-  });
+// LINKS
+document.getElementById("panel1").onclick = (e) => {
+  e.stopPropagation();
+  window.location.href = "https://discord.gg/en5Br2fKgx";
+};
 
-  document.getElementById("panel2").addEventListener("click", (e) => {
-    e.stopPropagation();
-    window.location.href = "cashapp.html";
-  });
+document.getElementById("panel2").onclick = (e) => {
+  e.stopPropagation();
+  window.location.href = "cashapp.html";
+};
 </script>
 
 </body>
