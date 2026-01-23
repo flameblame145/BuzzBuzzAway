@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Start Page</title>
+<title>Tracking</title>
 
 <style>
     /* --- RESET --- */
@@ -20,120 +20,114 @@
         height: 100vh;
         width: 100vw;
         overflow: hidden;
-        cursor: pointer;
-
-        /* FIXED WORKING GALAXY BACKGROUND */
-        background: url("https://i.ibb.co/8xJbw7V/purple-galaxy.jpg") center/cover no-repeat fixed;
-
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+        background: radial-gradient(ellipse at center, #1b0037 0%, #0a0012 70%);
+        position: relative;
     }
 
-    #enterText {
+    /* Glowing stars using pseudo-element */
+    body::before {
+        content: "";
         position: absolute;
-        top: 20%;
-        font-size: 2.2rem;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background:
+            radial-gradient(2px 2px at 10% 20%, #fff, transparent),
+            radial-gradient(1.5px 1.5px at 25% 50%, #fff, transparent),
+            radial-gradient(1px 1px at 70% 80%, #fff, transparent),
+            radial-gradient(2px 2px at 50% 30%, #fff, transparent),
+            radial-gradient(1px 1px at 80% 10%, #fff, transparent),
+            radial-gradient(1.2px 1.2px at 90% 60%, #fff, transparent);
+        background-size: cover;
+        animation: starTwinkle 5s linear infinite alternate;
+        z-index: 0;
+    }
+
+    @keyframes starTwinkle {
+        0% { opacity: 0.3; }
+        50% { opacity: 1; }
+        100% { opacity: 0.3; }
+    }
+
+    h1 {
         color: white;
-        letter-spacing: 2px;
-        text-shadow: 0 0 25px #b36bff;
-        animation: pulse 1.5s infinite alternate;
-        transition: opacity 0.7s ease;
+        text-shadow: 0 0 20px #b36bff;
+        margin-bottom: 40px;
+        z-index: 1;
+        font-size: 2.5rem;
     }
 
-    @keyframes pulse {
-        from { opacity: 0.4; }
-        to   { opacity: 1; }
-    }
-
-    .fadeOut {
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    #menu {
-        opacity: 0;
-        transition: opacity 1s ease;
+    .trackingWrapper {
         display: flex;
         flex-direction: column;
         gap: 20px;
-        width: 80%;
-        max-width: 350px;
+        z-index: 1;
+        width: 90%;
+        max-width: 400px;
     }
 
-    .btnWrapper {
-        background: rgba(255,255,255,0.05);
+    input[type="text"] {
         padding: 15px;
-        border-radius: 18px;
-        backdrop-filter: blur(6px);
-        border: 1px solid rgba(185,130,255,0.4);
-        box-shadow: 0 0 25px rgba(170, 120, 255, 0.6);
-    }
-
-    .menuBtn {
-        width: 100%;
-        font-size: 1.9rem;
-        background: transparent;
+        border-radius: 15px;
         border: none;
-        color: white;
-        cursor: pointer;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        text-shadow: 0 0 15px white;
-        transition: 0.25s ease;
-    }
-
-    .menuBtn:hover {
-        transform: scale(1.12);
-        text-shadow: 0 0 25px #d7a2ff;
-    }
-
-    #discount {
-        position: absolute;
-        bottom: 20px;
+        font-size: 1.2rem;
         width: 100%;
-        text-align: center;
-        font-size: 1.1rem;
-        color: #ffdeff;
-        letter-spacing: 1px;
-        text-shadow: 0 0 12px #d26cff;
+        outline: none;
+        background: rgba(255,255,255,0.05);
+        color: white;
+        text-shadow: 0 0 5px #fff;
+        backdrop-filter: blur(6px);
+        box-shadow: 0 0 20px rgba(180, 120, 255, 0.6);
+    }
+
+    input::placeholder {
+        color: rgba(255,255,255,0.7);
+    }
+
+    button {
+        padding: 15px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        background: rgba(180, 120, 255, 0.8);
+        color: white;
+        text-transform: uppercase;
+        font-weight: 600;
+        box-shadow: 0 0 20px rgba(180, 120, 255, 0.8);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(180, 120, 255, 1);
     }
 </style>
 </head>
 
-<body onclick="startEnter()">
+<body>
 
-<div id="enterText">Click anywhere to begin</div>
+<h1>USPS Tracking</h1>
 
-<div id="menu">
-    <div class="btnWrapper"><button class="menuBtn" onclick="go('discord')">Discord</button></div>
-    <div class="btnWrapper"><button class="menuBtn" onclick="go('cashapp')">CashApp</button></div>
-    <div class="btnWrapper"><button class="menuBtn" onclick="go('paypal')">PayPal</button></div>
-    <div class="btnWrapper"><button class="menuBtn" onclick="go('tracking')">Tracking</button></div>
+<div class="trackingWrapper">
+    <input type="text" id="trackingNumber" placeholder="Enter your USPS tracking number">
+    <button onclick="trackPackage()">Track</button>
 </div>
 
-<div id="discount">Use Code: <b>BUZZ10</b> for 10% off</div>
-
 <script>
-let started = false;
-
-function startEnter() {
-    if (started) return;
-    started = true;
-
-    document.body.style.cursor = "default";
-    document.getElementById("enterText").classList.add("fadeOut");
-
-    setTimeout(() => {
-        document.getElementById("menu").style.opacity = "1";
-    }, 700);
-}
-
-function go(where) {
-    if (where === "discord") window.location.href = "https://discord.gg/en5Br2fKgx";
-    if (where === "cashapp") window.location.href = "cashapp://";
-    if (where === "paypal") window.location.href = "https://paypal.com";
-    if (where === "tracking") window.location.href = "#tracking";
+function trackPackage() {
+    const number = document.getElementById('trackingNumber').value.trim();
+    if(number) {
+        // Redirect to USPS tracking
+        window.location.href = `https://tools.usps.com/go/TrackConfirmAction_input?qtc_tLabels1=${number}`;
+    } else {
+        alert("Please enter a tracking number!");
+    }
 }
 </script>
 
