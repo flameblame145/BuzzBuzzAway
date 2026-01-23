@@ -27,7 +27,6 @@
 
         /* CSS Galaxy Background */
         background: radial-gradient(ellipse at center, #1b0037 0%, #0a0012 70%);
-        animation: starsMove 60s linear infinite;
         position: relative;
     }
 
@@ -49,11 +48,6 @@
         background-size: cover;
         animation: starTwinkle 5s linear infinite alternate;
         z-index: 0;
-    }
-
-    @keyframes starsMove {
-        0% { background-position: 0 0; }
-        100% { background-position: -1000px 1000px; }
     }
 
     @keyframes starTwinkle {
@@ -95,6 +89,7 @@
         z-index: 1;
     }
 
+    /* --- FLOATING PANEL EFFECT --- */
     .btnWrapper {
         background: rgba(255,255,255,0.05);
         padding: 15px;
@@ -102,6 +97,19 @@
         backdrop-filter: blur(6px);
         border: 1px solid rgba(185,130,255,0.4);
         box-shadow: 0 0 25px rgba(170, 120, 255, 0.6);
+        animation: float 4s ease-in-out infinite;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+
+    .btnWrapper:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 0 35px rgba(180,120,255,0.8);
     }
 
     .menuBtn {
