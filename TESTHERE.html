@@ -1,170 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BuzzBuzzAway – Start</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start Page</title>
 
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Segoe UI", system-ui;
-  }
+    /* --- RESET --- */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+    }
 
-  body {
-    height: 100vh;
-    overflow: hidden;
-    background: radial-gradient(circle at 40% 20%, #7a1aff, #1e0038 70%);
-    position: relative;
-    cursor: pointer;
-  }
+    body {
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        cursor: pointer;
+        background: url("https://i.ibb.co/ykgXWJj/nebula-purple.jpg") center/cover no-repeat fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-  /* ⭐ Shooting Stars */
-  .star {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: white;
-    border-radius: 50%;
-    animation: starMove 4s linear infinite;
-  }
+    /* --- CLICK TO START TEXT --- */
+    #enterText {
+        position: absolute;
+        top: 20%;
+        font-size: 2rem;
+        color: white;
+        text-shadow: 0 0 20px #c78bff;
+        animation: pulse 1.5s infinite alternate;
+        transition: opacity 0.7s ease;
+    }
 
-  @keyframes starMove {
-    from { transform: translate(0, 0); opacity: 1; }
-    to { transform: translate(-250px, 300px); opacity: 0; }
-  }
+    @keyframes pulse {
+        from { opacity: 0.4; }
+        to   { opacity: 1; }
+    }
 
-  /* ✨ Enter Text */
-  #enterText {
-    position: absolute;
-    bottom: 60px;
-    width: 100%;
-    text-align: center;
-    color: #ffffffd8;
-    font-size: 26px;
-    letter-spacing: 2px;
-    animation: pulse 1.4s infinite alternate ease-in-out;
-    transition: opacity 0.6s ease-out;
-  }
+    .fadeOut {
+        opacity: 0;
+        pointer-events: none;
+    }
 
-  @keyframes pulse {
-    from { opacity: 1; }
-    to { opacity: 0.35; }
-  }
+    /* --- MENU --- */
+    #menu {
+        opacity: 0;
+        transition: opacity 1s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 80%;
+        max-width: 350px;
+    }
 
-  /* Fade out */
-  .fadeOut {
-    opacity: 0 !important;
-  }
+    .btnWrapper {
+        background: rgba(255,255,255,0.08);
+        padding: 15px;
+        border-radius: 18px;
+        backdrop-filter: blur(6px);
+        box-shadow: 0 0 30px rgba(180, 120, 255, 0.6);
+    }
 
-  /* 🌌 Panels */
-  .panel {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%) translateY(30px);
-    width: 300px;
-    padding: 20px 0;
-    border-radius: 20px;
-    background: rgba(110, 0, 180, 0.35);
-    box-shadow: 0 0 25px 10px #b366ff70;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
-    opacity: 0;
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    cursor: pointer;
-  }
+    .menuBtn {
+        width: 100%;
+        font-size: 2.3rem;
+        background: transparent;
+        border: none;
+        color: white;
+        cursor: pointer;
+        text-shadow: 0 0 15px white;
+        transition: 0.2s;
+    }
 
-  .panel img {
-    width: 34px;
-    height: 34px;
-  }
+    .menuBtn:hover {
+        transform: scale(1.1);
+    }
 
-  .panel span {
-    font-size: 22px;
-    color: white;
-    font-weight: 600;
-  }
-
-  /* Menu container */
-  #menu {
-    opacity: 0;
-    pointer-events: none;
-  }
+    /* Discount code bar */
+    #discount {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+        font-size: 1.1rem;
+        color: #ffdeff;
+        text-shadow: 0 0 10px #d26cff;
+    }
 </style>
 </head>
 
 <body onclick="startEnter()">
 
-<!-- ⭐ Shooting Stars -->
-<script>
-  for (let i = 0; i < 60; i++) {
-    const star = document.createElement("div");
-    star.classList.add("star");
-    star.style.top = Math.random() * window.innerHeight + "px";
-    star.style.left = Math.random() * window.innerWidth + "px";
-    star.style.animationDelay = Math.random() * 3 + "s";
-    document.body.appendChild(star);
-  }
-</script>
+<!-- CLICK ANYWHERE TEXT -->
+<div id="enterText">Click anywhere to begin</div>
 
-<!-- ✨ Enter Text -->
-<div id="enterText">Tap anywhere to enter</div>
-
-<!-- 🌌 MENU -->
+<!-- MENU -->
 <div id="menu">
-
-  <div id="panel1" class="panel" style="top: 32%;">
-    <img src="https://cdn.worldvectorlogo.com/logos/discord-6.svg">
-    <span>Discord</span>
-  </div>
-
-  <div id="panel2" class="panel" style="top: 50%;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Square_Cash_app_logo.svg">
-    <span>CashApp</span>
-  </div>
-
+    <div class="btnWrapper"><button class="menuBtn" onclick="go('discord')">💬</button></div>
+    <div class="btnWrapper"><button class="menuBtn" onclick="go('cashapp')">💵</button></div>
+    <div class="btnWrapper"><button class="menuBtn" onclick="go('paypal')">💳</button></div>
+    <div class="btnWrapper"><button class="menuBtn" onclick="go('tracking')">📦</button></div>
 </div>
+
+<div id="discount">Use Code: <b>BUZZ10</b> for 10% off</div>
 
 <script>
 let started = false;
 
 function startEnter() {
-  if (started) return;
-  started = true;
+    if (started) return;
+    started = true;
 
-  document.body.style.cursor = "default";
+    // Remove cursor lock
+    document.body.style.cursor = "default";
 
-  // Fade out enter text
-  document.getElementById("enterText").classList.add("fadeOut");
+    // Fade out intro text
+    document.getElementById("enterText").classList.add("fadeOut");
 
-  // Reveal menu
-  setTimeout(() => {
-    const menu = document.getElementById("menu");
-    menu.style.opacity = "1";
-    menu.style.pointerEvents = "all";
-
-    document.getElementById("panel1").style.opacity = "1";
-    document.getElementById("panel1").style.transform = "translateX(-50%) translateY(0px)";
-
-    document.getElementById("panel2").style.opacity = "1";
-    document.getElementById("panel2").style.transform = "translateX(-50%) translateY(0px)";
-  }, 600);
+    // Show menu after fade
+    setTimeout(() => {
+        document.getElementById("menu").style.opacity = "1";
+    }, 700);
 }
 
-// LINKS
-document.getElementById("panel1").onclick = (e) => {
-  e.stopPropagation();
-  window.location.href = "https://discord.gg/en5Br2fKgx";
-};
-
-document.getElementById("panel2").onclick = (e) => {
-  e.stopPropagation();
-  window.location.href = "cashapp.html";
-};
+// Button redirects
+function go(where) {
+    if (where === "discord") window.location.href = "https://discord.gg/en5Br2fKgx";
+    if (where === "cashapp") window.location.href = "cashapp://";
+    if (where === "paypal") window.location.href = "https://paypal.com";
+    if (where === "tracking") window.location.href = "#tracking";
+}
 </script>
 
 </body>
