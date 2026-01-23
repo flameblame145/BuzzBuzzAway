@@ -2,180 +2,138 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CashApp Checkout – verified</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start Page</title>
 
 <style>
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", system-ui, sans-serif;
-}
+    /* --- RESET --- */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Orbitron", "Segoe UI", sans-serif;
+    }
 
-/* GALAXY BACKGROUND WITH SHOOTING STARS */
-body {
-  min-height: 100vh;
-  background: radial-gradient(circle at top, #2a003f, #050010 70%);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap');
 
-/* FLOATING CHECKOUT CARD */
-.checkout {
-  position: relative;
-  width: 360px;
-  padding: 28px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow:
-    0 0 40px rgba(180, 80, 255, 0.35),
-    inset 0 0 20px rgba(255,255,255,0.05);
-  animation: float 5s ease-in-out infinite;
-  z-index: 2;
-  text-align: center;
-}
+    body {
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        cursor: pointer;
 
-/* FLOAT ANIMATION */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
+        /* FIXED WORKING GALAXY BACKGROUND */
+        background: url("https://i.ibb.co/8xJbw7V/purple-galaxy.jpg") center/cover no-repeat fixed;
 
-/* HEADER */
-.checkout h1 {
-  font-size: 1.4rem;
-  color: #ffffff;
-  margin-bottom: 6px;
-  text-align: center;
-}
-.checkout p.sub {
-  font-size: 0.8rem;
-  color: #cbb6ff;
-  text-align: center;
-  margin-bottom: 22px;
-}
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-/* CASHAPP ANIMATED TEXT */
-.cashapp-text {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #00ff00;
-  margin-bottom: 12px;
-  animation: glow 1.5s ease-in-out infinite alternate;
-}
+    #enterText {
+        position: absolute;
+        top: 20%;
+        font-size: 2.2rem;
+        color: white;
+        letter-spacing: 2px;
+        text-shadow: 0 0 25px #b36bff;
+        animation: pulse 1.5s infinite alternate;
+        transition: opacity 0.7s ease;
+    }
 
-@keyframes glow {
-  0% { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00; }
-  100% { text-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 60px #00ff00; }
-}
+    @keyframes pulse {
+        from { opacity: 0.4; }
+        to   { opacity: 1; }
+    }
 
-/* INPUT FIELD */
-label {
-  font-size: 0.7rem;
-  color: #cdbdff;
-  display: block;
-  margin-top: 12px;
-  margin-bottom: 4px;
-}
-input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background: rgba(255,255,255,0.12);
-  color: white;
-  text-align: center;
-}
+    .fadeOut {
+        opacity: 0;
+        pointer-events: none;
+    }
 
-/* PAY BUTTON */
-button {
-  margin-top: 22px;
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #050010;
-  background: linear-gradient(135deg, #a855f7, #67e8f9);
-  box-shadow: 0 0 25px rgba(170, 100, 255, 0.6);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+    #menu {
+        opacity: 0;
+        transition: opacity 1s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 80%;
+        max-width: 350px;
+    }
 
-button:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 35px rgba(170, 100, 255, 0.9);
-}
+    .btnWrapper {
+        background: rgba(255,255,255,0.05);
+        padding: 15px;
+        border-radius: 18px;
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(185,130,255,0.4);
+        box-shadow: 0 0 25px rgba(170, 120, 255, 0.6);
+    }
 
-/* FOOTER NOTE */
-.note {
-  margin-top: 14px;
-  font-size: 0.65rem;
-  text-align: center;
-  color: #a99bff;
-}
+    .menuBtn {
+        width: 100%;
+        font-size: 1.9rem;
+        background: transparent;
+        border: none;
+        color: white;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 0 0 15px white;
+        transition: 0.25s ease;
+    }
 
-/* STARS */
-body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(1px 1px at 20% 30%, white, transparent),
-    radial-gradient(1px 1px at 70% 60%, white, transparent),
-    radial-gradient(1px 1px at 40% 80%, white, transparent),
-    radial-gradient(1px 1px at 90% 20%, white, transparent);
-  animation: twinkle 6s infinite alternate;
-  opacity: 0.8;
-}
+    .menuBtn:hover {
+        transform: scale(1.12);
+        text-shadow: 0 0 25px #d7a2ff;
+    }
 
-@keyframes twinkle {
-  from { opacity: 0.4; }
-  to { opacity: 0.9; }
-}
+    #discount {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+        font-size: 1.1rem;
+        color: #ffdeff;
+        letter-spacing: 1px;
+        text-shadow: 0 0 12px #d26cff;
+    }
 </style>
 </head>
 
-<body>
+<body onclick="startEnter()">
 
-<div class="checkout">
-  <h1>Secured Checkout</h1>
-  <p class="sub">Secured Checkout – verified ✅</p>
+<div id="enterText">Click anywhere to begin</div>
 
-  <!-- CASHAPP OVER INPUT -->
-  <div class="cashapp-text">CashApp</div>
-
-  <!-- CUSTOMER CHOOSES AMOUNT -->
-  <label>Enter Amount to Pay ($)</label>
-  <input id="amount" type="number" min="1" placeholder="Enter amount">
-
-  <button onclick="payCashApp()">Pay with CashApp</button>
-
-  <div class="note">
-    BUZZBUZZAWAY ALL RIGHTS RESERVED
-  </div>
+<div id="menu">
+    <div class="btnWrapper"><button class="menuBtn" onclick="go('discord')">Discord</button></div>
+    <div class="btnWrapper"><button class="menuBtn" onclick="go('cashapp')">CashApp</button></div>
+    <div class="btnWrapper"><button class="menuBtn" onclick="go('paypal')">PayPal</button></div>
+    <div class="btnWrapper"><button class="menuBtn" onclick="go('tracking')">Tracking</button></div>
 </div>
 
+<div id="discount">Use Code: <b>BUZZ10</b> for 10% off</div>
+
 <script>
-function payCashApp() {
-  let amount = document.getElementById("amount").value;
+let started = false;
 
-  if (!amount || amount <= 0) {
-    alert("Please enter a valid amount.");
-    return;
-  }
+function startEnter() {
+    if (started) return;
+    started = true;
 
-  // Redirect to your CashApp
-  window.location.href = "https://cash.app/$trazeymax/" + amount;
+    document.body.style.cursor = "default";
+    document.getElementById("enterText").classList.add("fadeOut");
+
+    setTimeout(() => {
+        document.getElementById("menu").style.opacity = "1";
+    }, 700);
+}
+
+function go(where) {
+    if (where === "discord") window.location.href = "https://discord.gg/en5Br2fKgx";
+    if (where === "cashapp") window.location.href = "cashapp://";
+    if (where === "paypal") window.location.href = "https://paypal.com";
+    if (where === "tracking") window.location.href = "#tracking";
 }
 </script>
 
