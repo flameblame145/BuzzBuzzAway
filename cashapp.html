@@ -13,10 +13,10 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* BODY BACKGROUND */
+/* BODY & COSMIC BACKGROUND */
 body {
   min-height: 100vh;
-  background: radial-gradient(circle at 30% 30%, #2a003f, #050010 85%);
+  background: radial-gradient(circle at 30% 30%, #2a003f, #050010 80%);
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -24,51 +24,51 @@ body {
   position: relative;
 }
 
-/* PANEL NEBULA GLOW */
-.checkout::before {
+/* GALAXY NEBULA GLOW */
+body::after {
   content: '';
   position: absolute;
-  top: -30px;
-  left: -30px;
-  right: -30px;
-  bottom: -30px;
-  background: radial-gradient(circle, rgba(102,0,255,0.15), rgba(0,255,128,0.05));
-  filter: blur(80px);
-  z-index: -1;
-  border-radius: 20px;
+  inset: 0;
+  background: radial-gradient(circle, rgba(102,0,255,0.2), rgba(0,255,128,0.05));
+  filter: blur(120px);
+  z-index: 0;
 }
 
-/* PANEL */
+/* CHECKOUT PANEL */
 .checkout {
   position: relative;
-  width: 380px;
+  width: 400px;
   padding: 40px 28px;
   border-radius: 20px;
-  background: rgba(0,0,0,0.25);
+  background: rgba(0,0,0,0.2);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.2);
-  box-shadow: 0 0 60px rgba(102,0,255,0.5), inset 0 0 30px rgba(255,255,255,0.1);
+  box-shadow: 
+    0 0 60px rgba(102,0,255,0.5), 
+    inset 0 0 30px rgba(255,255,255,0.1);
   animation: float 4s ease-in-out infinite;
   z-index: 2;
   text-align: center;
   color: white;
+  overflow: hidden;
 }
 
 /* FLOAT ANIMATION */
 @keyframes float {
   0%,100% {transform: translateY(0);}
-  50% {transform: translateY(-15px);}
+  50% {transform: translateY(-20px);}
 }
 
 /* HEADER */
 .checkout h1 {
   font-size: 1.7rem;
+  color: #ffffff;
   margin-bottom: 6px;
 }
 .checkout p.sub {
   font-size: 0.85rem;
-  margin-bottom: 24px;
   color: #cbb6ff;
+  margin-bottom: 24px;
 }
 
 /* CASHAPP TEXT */
@@ -78,13 +78,14 @@ body {
   color: #00ff00;
   margin-bottom: 20px;
   animation: neonGlow 1.2s ease-in-out infinite alternate;
-  text-shadow:
+  text-shadow: 
     0 0 10px #00ff00,
     0 0 20px #00ff00,
     0 0 30px #00ff00,
     0 0 50px #00ff00,
     0 0 80px #00ff00;
 }
+
 @keyframes neonGlow {
   0% {text-shadow: 0 0 10px #00ff00,0 0 20px #00ff00,0 0 30px #00ff00,0 0 50px #00ff00;}
   50% {text-shadow: 0 0 20px #00ff00,0 0 40px #00ff00,0 0 60px #00ff00,0 0 100px #00ff00;}
@@ -143,40 +144,9 @@ button:hover {
   text-align: center;
   color: #a99bff;
 }
-
-/* SHOOTING STARS */
-.star {
-  position: absolute;
-  width: 2px;
-  height: 100px;
-  background: linear-gradient(white, rgba(255,255,255,0));
-  top: -100px;
-  opacity: 0.8;
-  animation: shoot 2s linear infinite;
-  z-index: 0;
-}
-@keyframes shoot {
-  0% {transform: translateX(0) translateY(0) rotate(45deg); opacity:1;}
-  100% {transform: translateX(1200px) translateY(1200px) rotate(45deg); opacity:0;}
-}
-
-/* MULTIPLE STARS POSITIONS */
-.star:nth-child(1) { left: 5%; animation-delay:0s; }
-.star:nth-child(2) { left: 20%; animation-delay:1s; }
-.star:nth-child(3) { left: 40%; animation-delay:1.5s; }
-.star:nth-child(4) { left: 60%; animation-delay:0.5s; }
-.star:nth-child(5) { left: 80%; animation-delay:2s; }
-
 </style>
 </head>
 <body>
-
-<!-- SHOOTING STARS -->
-<div class="star"></div>
-<div class="star"></div>
-<div class="star"></div>
-<div class="star"></div>
-<div class="star"></div>
 
 <div class="checkout">
   <h1>Secured Checkout</h1>
@@ -204,5 +174,6 @@ function payCashApp() {
   window.location.href = "https://cash.app/$trazeymax/" + amount;
 }
 </script>
+
 </body>
 </html>
