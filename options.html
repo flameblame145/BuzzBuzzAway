@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Secured Checkout – verified</title>
+<title>CashApp Checkout – verified</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -14,7 +14,7 @@
   font-family: "Segoe UI", system-ui, sans-serif;
 }
 
-/* GALAXY BACKGROUND */
+/* GALAXY BACKGROUND WITH SHOOTING STARS */
 body {
   min-height: 100vh;
   background: radial-gradient(circle at top, #2a003f, #050010 70%);
@@ -22,25 +22,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* STARS */
-body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(1px 1px at 20% 30%, white, transparent),
-    radial-gradient(1px 1px at 70% 60%, white, transparent),
-    radial-gradient(1px 1px at 40% 80%, white, transparent),
-    radial-gradient(1px 1px at 90% 20%, white, transparent);
-  animation: twinkle 6s infinite alternate;
-  opacity: 0.8;
-}
-
-@keyframes twinkle {
-  from { opacity: 0.4; }
-  to { opacity: 0.9; }
+  position: relative;
 }
 
 /* FLOATING CHECKOUT CARD */
@@ -57,6 +39,13 @@ body::before {
     inset 0 0 20px rgba(255,255,255,0.05);
   animation: float 5s ease-in-out infinite;
   z-index: 2;
+  text-align: center;
+}
+
+/* FLOAT ANIMATION */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 
 /* HEADER */
@@ -66,7 +55,6 @@ body::before {
   margin-bottom: 6px;
   text-align: center;
 }
-
 .checkout p.sub {
   font-size: 0.8rem;
   color: #cbb6ff;
@@ -74,24 +62,21 @@ body::before {
   margin-bottom: 22px;
 }
 
-/* PRODUCT */
-.product {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 18px;
-  color: #fff;
-}
-
-.product span {
-  font-size: 0.95rem;
-}
-
-.price {
+/* CASHAPP ANIMATED TEXT */
+.cashapp-text {
+  font-size: 2rem;
   font-weight: bold;
-  color: #9dfcff;
+  color: #00ff00;
+  margin-bottom: 12px;
+  animation: glow 1.5s ease-in-out infinite alternate;
 }
 
-/* INPUT LABEL */
+@keyframes glow {
+  0% { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00; }
+  100% { text-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 60px #00ff00; }
+}
+
+/* INPUT FIELD */
 label {
   font-size: 0.7rem;
   color: #cdbdff;
@@ -99,8 +84,6 @@ label {
   margin-top: 12px;
   margin-bottom: 4px;
 }
-
-/* INPUT FIELD */
 input {
   width: 100%;
   padding: 10px;
@@ -109,6 +92,7 @@ input {
   outline: none;
   background: rgba(255,255,255,0.12);
   color: white;
+  text-align: center;
 }
 
 /* PAY BUTTON */
@@ -139,6 +123,25 @@ button:hover {
   text-align: center;
   color: #a99bff;
 }
+
+/* STARS */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, white, transparent),
+    radial-gradient(1px 1px at 70% 60%, white, transparent),
+    radial-gradient(1px 1px at 40% 80%, white, transparent),
+    radial-gradient(1px 1px at 90% 20%, white, transparent);
+  animation: twinkle 6s infinite alternate;
+  opacity: 0.8;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.4; }
+  to { opacity: 0.9; }
+}
 </style>
 </head>
 
@@ -148,10 +151,8 @@ button:hover {
   <h1>Secured Checkout</h1>
   <p class="sub">Secured Checkout – verified ✅</p>
 
-  <div class="product">
-    <span>Pulse X Device</span>
-    <span class="price">$37.99</span>
-  </div>
+  <!-- CASHAPP OVER INPUT -->
+  <div class="cashapp-text">CashApp</div>
 
   <!-- CUSTOMER CHOOSES AMOUNT -->
   <label>Enter Amount to Pay ($)</label>
@@ -174,7 +175,7 @@ function payCashApp() {
   }
 
   // Redirect to your CashApp
-  window.location.href = "https://cash.app/$trazeymax" + amount;
+  window.location.href = "https://cash.app/$trazeymax/" + amount;
 }
 </script>
 
