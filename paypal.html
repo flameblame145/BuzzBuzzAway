@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PayPal Checkout – Galaxy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* PURPLE NEBULA BACKGROUND YOU LOVED */
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at 40% 20%, #7a1aff, #1e0038 70%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* EXTRA NEBULA GLOW */
+body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(140,0,255,0.35), rgba(60,0,120,0.2), rgba(0,0,0,0));
+  filter: blur(130px);
+  z-index: 0;
+}
+
+/* TOP BUTTONS */
+.discord-btn, .back-btn {
+  padding: 14px 26px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(59,130,246,0.9);
+  transition: 0.3s;
+  z-index: 3;
+  position: absolute;
+}
+
+.discord-btn {
+  top: 25px;
+  right: 25px;
+  background: #3b82f6;
+  box-shadow: 0 0 20px rgba(59,130,246,0.9);
+}
+
+.discord-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px rgba(59,130,246,1);
+}
+
+.back-btn {
+  top: 25px;
+  left: 25px;
+  background: #ff5a5a;
+  box-shadow: 0 0 20px rgba(255,90,90,0.9);
+}
+
+.back-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px rgba(255,90,90,1);
+}
+
+/* FLOATING PANEL */
+.checkout {
+  position: relative;
+  width: 400px;
+  padding: 40px 28px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 0 50px rgba(165,90,255,0.6);
+  animation: float 4s ease-in-out infinite;
+  z-index: 2;
+  text-align: center;
+  color: white;
+}
+
+@keyframes float {
+  0%,100% {transform: translateY(0);}
+  50% {transform: translateY(-15px);}
+}
+
+/* PAYPAL TITLE */
+.paypal-text {
+  font-size: 3.1rem;
+  font-weight: 900;
+  color: #3b82f6;
+  text-shadow:
+    0 0 10px #3b82f6,
+    0 0 25px #3b82f6,
+    0 0 50px #3b82f6;
+  animation: neonPulse 1.3s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse {
+  0% {text-shadow: 0 0 20px #3b82f6,0 0 40px #3b82f6;}
+  100% {text-shadow: 0 0 35px #3b82f6,0 0 70px #3b82f6;}
+}
+
+/* INPUT */
+label {
+  font-size: 0.85rem;
+  color: #c4d4ff;
+  margin-top: 20px;
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  margin-top: 5px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  text-align: center;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  font-size: 1.1rem;
+  transition: 0.3s;
+}
+
+input:hover, input:focus {
+  background: rgba(59,130,246,0.35);
+  box-shadow: 0 0 20px rgba(59,130,246,0.7);
+}
+
+/* BUTTON */
+button.pay-btn {
+  margin-top: 25px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  color: #080014;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 35px rgba(59,130,246,0.8);
+  transition: 0.25s;
+}
+
+button.pay-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 55px rgba(59,130,246,1);
+}
+
+/* CONTACT INFO */
+.footer-contact {
+  margin-top: 22px;
+  font-size: 0.75rem;
+  color: #c9b8ff;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACK BUTTON -->
+<button class="back-btn" onclick="window.history.back()">← Back</button>
+
+<!-- DISCORD BUTTON -->
+<button class="discord-btn" onclick="window.location.href='https://discord.gg/en5Br2fKgx'">Join Discord</button>
+
+<!-- MAIN PANEL -->
+<div class="checkout">
+
+  <h1>Secured Checkout</h1>
+  <p style="color:#caaeff;">Verified ✔️</p>
+
+  <div class="paypal-text">PayPal</div>
+
+  <label>Enter Amount to Pay ($)</label>
+  <input id="amount" type="number" placeholder="Enter amount">
+
+  <button class="pay-btn" onclick="payPayPal()">Pay with PayPal</button>
+
+  <div class="footer-contact">
+    Contact Us: <br>
+    <b>onlyusingforselling@gmail.com</b> <br><br>
+    BUZZBUZZAWAY © All Rights Reserved
+  </div>
+
+</div>
+
+<script>
+function payPayPal() {
+  let amount = document.getElementById("amount").value;
+  if (!amount || amount <= 0) {
+    alert("Please enter a valid amount.");
+    return;
+  }
+  window.location.href = "https://paypal.me/paymepaypalplease/" + amount;
+}
+</script>
+
+</body>
+</html>
