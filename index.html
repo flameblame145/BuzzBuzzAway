@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Secured Checkout – verified</title>
+<title>BuzzBuzzAway – Enter</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -11,170 +11,138 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", system-ui, sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* GALAXY BACKGROUND */
+/* PURPLE GALAXY BACKGROUND */
 body {
-  min-height: 100vh;
-  background: radial-gradient(circle at top, #2a003f, #050010 70%);
-  overflow: hidden;
+  height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at 20% 20%, #6a0dad, #240046 70%, #0a0018);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
 }
 
-/* STARS */
-body::before {
+/* NEBULA GLOW OVERLAY */
+body::after {
   content: "";
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(1px 1px at 20% 30%, white, transparent),
-    radial-gradient(1px 1px at 70% 60%, white, transparent),
-    radial-gradient(1px 1px at 40% 80%, white, transparent),
-    radial-gradient(1px 1px at 90% 20%, white, transparent);
-  animation: twinkle 6s infinite alternate;
-  opacity: 0.8;
+  background: radial-gradient(circle, rgba(200,0,255,0.25), rgba(80,0,130,0.2), rgba(0,0,0,0));
+  filter: blur(150px);
+  pointer-events: none;
+  z-index: 0;
 }
 
-@keyframes twinkle {
-  from { opacity: 0.4; }
-  to { opacity: 0.9; }
-}
-
-/* FLOATING CHECKOUT CARD */
-.checkout {
-  position: relative;
-  width: 360px;
-  padding: 28px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow:
-    0 0 40px rgba(180, 80, 255, 0.35),
-    inset 0 0 20px rgba(255,255,255,0.05);
-  animation: float 5s ease-in-out infinite;
-  z-index: 2;
-}
-
-/* HEADER */
-.checkout h1 {
-  font-size: 1.4rem;
-  color: #ffffff;
-  margin-bottom: 6px;
-  text-align: center;
-}
-
-.checkout p.sub {
-  font-size: 0.8rem;
-  color: #cbb6ff;
-  text-align: center;
-  margin-bottom: 22px;
-}
-
-/* PRODUCT */
-.product {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 18px;
-  color: #fff;
-}
-
-.product span {
-  font-size: 0.95rem;
-}
-
-.price {
-  font-weight: bold;
-  color: #9dfcff;
-}
-
-/* INPUT LABEL */
-label {
-  font-size: 0.7rem;
-  color: #cdbdff;
-  display: block;
-  margin-top: 12px;
-  margin-bottom: 4px;
-}
-
-/* INPUT FIELD */
-input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background: rgba(255,255,255,0.12);
+/* CLICK ANYWHERE TEXT */
+#enterText {
+  position: absolute;
+  font-size: 2.2rem;
   color: white;
+  text-shadow: 0 0 25px #d48cff, 0 0 45px #b66aff;
+  animation: pulse 2s infinite;
+  z-index: 2;
+  user-select: none;
 }
 
-/* PAY BUTTON */
-button {
-  margin-top: 22px;
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #050010;
-  background: linear-gradient(135deg, #a855f7, #67e8f9);
-  box-shadow: 0 0 25px rgba(170, 100, 255, 0.6);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+@keyframes pulse {
+  0% {opacity: 0.4;}
+  50% {opacity: 1;}
+  100% {opacity: 0.4;}
 }
 
-button:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 35px rgba(170, 100, 255, 0.9);
+/* MENU PANEL CONTAINER */
+.menu {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: 1.3s;
+  z-index: 3;
 }
 
-/* FOOTER NOTE */
-.note {
-  margin-top: 14px;
-  font-size: 0.65rem;
+/* FLOATING PANELS */
+.panel {
+  width: 260px;
+  margin: 15px auto;
+  padding: 18px;
   text-align: center;
-  color: #a99bff;
+  font-size: 1.2rem;
+  color: white;
+  border-radius: 14px;
+  text-decoration: none;
+  display: block;
+
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 0 25px rgba(170,100,255,0.7),
+    inset 0 0 20px rgba(255,255,255,0.05);
+
+  transition: 0.3s;
+  animation: float 4s ease-in-out infinite;
+}
+
+.panel:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 0 35px rgba(200,120,255,1),
+    inset 0 0 25px rgba(255,255,255,0.15);
+}
+
+@keyframes float {
+  0%,100% {transform: translateY(0);}
+  50% {transform: translateY(-12px);}
+}
+
+/* FADE OUT CLICK TEXT */
+.fadeOut {
+  animation: fadeAway 1s forwards;
+}
+
+@keyframes fadeAway {
+  0% {opacity: 1;}
+  100% {opacity: 0;}
 }
 </style>
 </head>
 
-<body>
+<body onclick="startEnter()">
 
-<div class="checkout">
-  <h1>Secured Checkout</h1>
-  <p class="sub">Secured Checkout – verified ✅</p>
+<!-- CLICK TO ENTER TEXT -->
+<div id="enterText">Click Anywhere to Enter</div>
 
-  <div class="product">
-    <span>Pulse X Device</span>
-    <span class="price">$37.99</span>
-  </div>
-
-  <!-- CUSTOMER CHOOSES AMOUNT -->
-  <label>Enter Amount to Pay ($)</label>
-  <input id="amount" type="number" min="1" placeholder="Enter amount">
-
-  <button onclick="payCashApp()">Pay with CashApp</button>
-
-  <div class="note">
-    BUZZBUZZAWAY ALL RIGHTS RESERVED
-  </div>
+<!-- MENU OPTIONS -->
+<div id="menu" class="menu">
+  <a class="panel" href="mailto:onlyusingforselling@gmail.com">📩 Contact Us</a>
+  <a class="panel" href="https://discord.gg/en5Br2fKgx">💬 Join Discord</a>
+  <a class="panel" href="cashapp.html">💵 CashApp</a>
+  <a class="panel" href="paypal.html">💳 PayPal</a>
 </div>
 
 <script>
-function payCashApp() {
-  let amount = document.getElementById("amount").value;
+let started = false;
 
-  if (!amount || amount <= 0) {
-    alert("Please enter a valid amount.");
-    return;
-  }
+function startEnter() {
+  if (started) return;
+  started = true;
 
-  // Redirect to your CashApp
-  window.location.href = "https://cash.app/$trazeymax" + amount;
+  document.body.style.cursor = "default";
+
+  // Fade out click text
+  document.getElementById("enterText").classList.add("fadeOut");
+
+  // Reveal the floating glowing panels
+  setTimeout(() => {
+    const menu = document.getElementById("menu");
+    menu.style.opacity = "1";
+    menu.style.pointerEvents = "all";
+  }, 500);
 }
 </script>
 
