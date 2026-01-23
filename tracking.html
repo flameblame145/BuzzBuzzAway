@@ -6,124 +6,200 @@
 <title>Tracking</title>
 
 <style>
-    /* --- RESET --- */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Orbitron", "Segoe UI", sans-serif;
-    }
+/* --- RESET --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Orbitron", "Segoe UI", sans-serif;
+}
 
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap');
 
-    body {
-        height: 100vh;
-        width: 100vw;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: radial-gradient(ellipse at center, #1b0037 0%, #0a0012 70%);
-        position: relative;
-    }
+/* GALAXY BACKGROUND */
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(ellipse at center, #1b0037 0%, #0a0012 70%);
+  position: relative;
+}
 
-    /* Glowing stars using pseudo-element */
-    body::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background:
-            radial-gradient(2px 2px at 10% 20%, #fff, transparent),
-            radial-gradient(1.5px 1.5px at 25% 50%, #fff, transparent),
-            radial-gradient(1px 1px at 70% 80%, #fff, transparent),
-            radial-gradient(2px 2px at 50% 30%, #fff, transparent),
-            radial-gradient(1px 1px at 80% 10%, #fff, transparent),
-            radial-gradient(1.2px 1.2px at 90% 60%, #fff, transparent);
-        background-size: cover;
-        animation: starTwinkle 5s linear infinite alternate;
-        z-index: 0;
-    }
+/* STAR TWINKLE */
+body::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(2px 2px at 10% 20%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 25% 50%, #fff, transparent),
+    radial-gradient(1px 1px at 70% 80%, #fff, transparent),
+    radial-gradient(2px 2px at 50% 30%, #fff, transparent),
+    radial-gradient(1px 1px at 80% 10%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 90% 60%, #fff, transparent);
+  background-size: cover;
+  animation: starTwinkle 5s linear infinite alternate;
+  z-index: 0;
+}
 
-    @keyframes starTwinkle {
-        0% { opacity: 0.3; }
-        50% { opacity: 1; }
-        100% { opacity: 0.3; }
-    }
+@keyframes starTwinkle {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
 
-    h1 {
-        color: white;
-        text-shadow: 0 0 20px #b36bff;
-        margin-bottom: 40px;
-        z-index: 1;
-        font-size: 2.5rem;
-    }
+/* TOP BUTTONS */
+.discord-btn, .back-btn {
+  padding: 14px 26px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(59,130,246,0.9);
+  transition: 0.3s;
+  z-index: 3;
+  position: absolute;
+}
 
-    .trackingWrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        z-index: 1;
-        width: 90%;
-        max-width: 400px;
-    }
+.discord-btn {
+  top: 25px;
+  right: 25px;
+  background: #3b82f6;
+  box-shadow: 0 0 20px rgba(59,130,246,0.9);
+}
 
-    input[type="text"] {
-        padding: 15px;
-        border-radius: 15px;
-        border: none;
-        font-size: 1.2rem;
-        width: 100%;
-        outline: none;
-        background: rgba(255,255,255,0.05);
-        color: white;
-        text-shadow: 0 0 5px #fff;
-        backdrop-filter: blur(6px);
-        box-shadow: 0 0 20px rgba(180, 120, 255, 0.6);
-    }
+.discord-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px rgba(59,130,246,1);
+}
 
-    input::placeholder {
-        color: rgba(255,255,255,0.7);
-    }
+.back-btn {
+  top: 25px;
+  left: 25px;
+  background: #ff5a5a;
+  box-shadow: 0 0 20px rgba(255,90,90,0.9);
+}
 
-    button {
-        padding: 15px;
-        font-size: 1.2rem;
-        border: none;
-        border-radius: 15px;
-        cursor: pointer;
-        background: rgba(180, 120, 255, 0.8);
-        color: white;
-        text-transform: uppercase;
-        font-weight: 600;
-        box-shadow: 0 0 20px rgba(180, 120, 255, 0.8);
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
+.back-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px rgba(255,90,90,1);
+}
 
-    button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 30px rgba(180, 120, 255, 1);
-    }
+/* FLOATING PANEL */
+.trackingWrapper {
+  position: relative;
+  width: 400px;
+  padding: 40px 28px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 0 50px rgba(165,90,255,0.6);
+  animation: float 4s ease-in-out infinite;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  color: white;
+}
+
+@keyframes float {
+  0%,100% {transform: translateY(0);}
+  50% {transform: translateY(-15px);}
+}
+
+/* TITLE */
+h1 {
+  color: white;
+  text-shadow: 0 0 20px #b36bff;
+  font-size: 2.5rem;
+}
+
+/* INPUT */
+input[type="text"] {
+  padding: 15px;
+  border-radius: 15px;
+  border: none;
+  font-size: 1.2rem;
+  width: 100%;
+  outline: none;
+  background: rgba(255,255,255,0.05);
+  color: white;
+  text-shadow: 0 0 5px #fff;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(180, 120, 255, 0.6);
+}
+
+input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+/* TRACK BUTTON */
+button.track-btn {
+  padding: 15px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  background: rgba(180, 120, 255, 0.8);
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(180, 120, 255, 0.8);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button.track-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(180, 120, 255, 1);
+}
+
+/* FOOTER CONTACT */
+.footer-contact {
+  margin-top: 20px;
+  font-size: 0.75rem;
+  color: #c9b8ff;
+  text-align: center;
+}
 </style>
 </head>
 
 <body>
 
-<h1>USPS Tracking</h1>
+<!-- BACK BUTTON -->
+<button class="back-btn" onclick="window.history.back()">← Back</button>
 
+<!-- DISCORD BUTTON -->
+<button class="discord-btn" onclick="window.location.href='https://discord.gg/en5Br2fKgx'">Join Discord</button>
+
+<!-- FLOATING TRACKING PANEL -->
 <div class="trackingWrapper">
-    <input type="text" id="trackingNumber" placeholder="Enter your USPS tracking number">
-    <button onclick="trackPackage()">Track</button>
+
+  <h1>USPS Tracking</h1>
+
+  <input type="text" id="trackingNumber" placeholder="Enter your USPS tracking number">
+  <button class="track-btn" onclick="trackPackage()">Track</button>
+
+  <div class="footer-contact">
+    Contact Us: <br>
+    <b>onlyusingforselling@gmail.com</b> <br><br>
+    BUZZBUZZAWAY © All Rights Reserved
+  </div>
+
 </div>
 
 <script>
 function trackPackage() {
     const number = document.getElementById('trackingNumber').value.trim();
     if(number) {
-        // Redirect to USPS tracking
         window.location.href = `https://tools.usps.com/go/TrackConfirmAction_input?qtc_tLabels1=${number}`;
     } else {
         alert("Please enter a tracking number!");
