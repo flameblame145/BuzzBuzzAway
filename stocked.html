@@ -91,9 +91,9 @@ function searchStock() {
   const input = document.getElementById("searchInput").value.trim().toLowerCase();
   const found = stockItems.some(item => item.toLowerCase() === input);
   if (found) {
-    window.location.href = "instock.html";
+    window.location.href = "stocked.html"; // redirects to stocked page
   } else {
-    window.location.href = "outofstock.html";
+    window.location.href = "notstocked.html"; // redirects to out-of-stock page
   }
 }
 </script>
