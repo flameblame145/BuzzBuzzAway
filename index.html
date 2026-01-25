@@ -24,13 +24,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
-        /* CSS Galaxy Background */
         background: radial-gradient(ellipse at center, #1b0037 0%, #0a0012 70%);
         position: relative;
     }
 
-    /* Glowing stars using pseudo-element */
     body::before {
         content: "";
         position: absolute;
@@ -56,7 +53,6 @@
         100% { opacity: 0.3; }
     }
 
-    /* --- SECRET EMOJI --- */
     #secretEmoji {
         position: absolute;
         top: 10px;
@@ -87,12 +83,13 @@
         letter-spacing: 2px;
         text-shadow: 0 0 25px #b36bff;
         animation: pulse 1.5s infinite alternate;
-        transition: opacity 0.7s ease;
+        transition: opacity 0.7s ease, transform 0.7s ease;
         z-index: 1;
     }
 
     .fadeOut {
         opacity: 0;
+        transform: translateY(-20px);
         pointer-events: none;
     }
 
@@ -107,7 +104,6 @@
         z-index: 1;
     }
 
-    /* --- FLOATING PANEL EFFECT --- */
     .btnWrapper {
         background: rgba(255,255,255,0.05);
         padding: 15px;
@@ -164,7 +160,6 @@
 
 <body onclick="startEnter()">
 
-<!-- SECRET EMOJI -->
 <div id="secretEmoji">🤫</div>
 
 <div id="enterText">Click anywhere to begin</div>
@@ -187,9 +182,14 @@ function startEnter() {
     started = true;
 
     document.body.style.cursor = "default";
-    document.getElementById("enterText").classList.add("fadeOut");
+    const enterText = document.getElementById("enterText");
 
+    // Add fade out + slide up effect
+    enterText.classList.add("fadeOut");
+
+    // Remove it from DOM after animation
     setTimeout(() => {
+        enterText.style.display = "none";
         document.getElementById("menu").style.opacity = "1";
     }, 700);
 }
