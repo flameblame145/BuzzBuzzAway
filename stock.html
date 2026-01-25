@@ -211,20 +211,46 @@ button.search-btn:hover {
 </div>
 
 <script>
+// Stock items list
 const stockItems = [
 "Elf Bar","Lost Mary","Geek Bar","RAZ","Flum","Fifty Bar","Foger","Off-Stamp","Fume","Spaceman","Puff Bar","OXBAR","Hyde","HQD","Kangvape","VIHO","SWFT","Vozol","Kado Bar","Snowwolf","iJoy","Snoopy Smoke","Pillow Talk","Lost Angel","SKE","Elux","Hayati","RifBar","Adjust","DOJO","SOFI","Vapengin","Airis","Orion Bar","Aloha Sun","Binaries","RINNBAR","FLOAT MELLO","JNR","One Tank","Ronaldinho 10","UNO","Cookies","Vaporesso","GeekVape","Smok","Uwell","VOOPOO","Aspire","Innokin","Lost Vape","OXVA","Suorin","Freemax","HorizonTech","Hellvape","Wotofo","Dovpo","DotMod","Vandy Vape","Steam Crave","Sigelei","Joyetech","Kangertech","Eleaf","JAC Vapour","Nevoks","Apollo","Smoko","Vaperz Cloud","Digiflavor","Teslacigs","Think Vape","Smoant","Limitless Mod Co","asMODus","Naked 100","Vapetasia","Juice Head","Dinner Lady","Bar Juice 5000","Pod Salt","IVG","Vampire Vape","Nasty Juice","Monster Vape Labs","Cloud Nurdz","Coastal Clouds","Pachamama","Twist E-Liquids","Keep It 100","Sadboy","7 Daze","Glas Vapor","Riot Squad","Zeus Juice","Beard Vape Co","Candy King","Air Factory","Skwezed","Ohm Brew","Aisu","Innevape","Humble Juice Co","Bad Drip Labs","Ripe Vapes","Fruitia","Pod Juice","The Finest","Vuse","JUUL","NJOY","Blu","Logic","RELX"
 ];
 
+// Function to calculate Levenshtein Distance
+function levenshtein(a, b) {
+    const dp = Array.from({length: a.length + 1}, () => Array(b.length + 1).fill(0));
+    for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+    for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+    for (let i = 1; i <= a.length; i++) {
+        for (let j = 1; j <= b.length; j++) {
+            if (a[i-1] === b[j-1]) dp[i][j] = dp[i-1][j-1];
+            else dp[i][j] = 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+        }
+    }
+    return dp[a.length][b.length];
+}
+
+// Fuzzy search function
 function searchStock() {
-  const input = document.getElementById("searchInput").value.trim().toLowerCase();
-  const found = stockItems.some(item => item.toLowerCase() === input);
-  if (found) {
-    window.location.href = "stocked.html"; // redirects to stocked page
-  } else {
-    window.location.href = "notstocked.html"; // redirects to out-of-stock page
-  }
+    const input = document.getElementById("searchInput").value.trim().toLowerCase();
+    let found = false;
+
+    for (const item of stockItems) {
+        const itemLower = item.toLowerCase();
+        const distance = levenshtein(input, itemLower);
+        const threshold = Math.floor(itemLower.length * 0.3); // allow ~30% typo
+        if (distance <= threshold) {
+            found = true;
+            break;
+        }
+    }
+
+    if (found) {
+        window.location.href = "stocked.html"; // redirects to stocked page
+    } else {
+        window.location.href = "notstocked.html"; // redirects to out-of-stock page
+    }
 }
 </script>
-
 </body>
 </html>
