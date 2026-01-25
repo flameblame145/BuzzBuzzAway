@@ -6,162 +6,129 @@
 <title>Zero It!</title>
 
 <style>
-    /* --- RESET --- */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Orbitron", "Segoe UI", sans-serif;
-    }
+/* --- RESET --- */
+* { margin:0; padding:0; box-sizing:border-box; font-family:"Orbitron","Segoe UI",sans-serif; }
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap');
 
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap');
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at center, #1b0037 0%, #0a0012 70%);
+    position: relative;
+}
 
-    body {
-        height: 100vh;
-        width: 100vw;
-        overflow: hidden;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: radial-gradient(ellipse at center, #1b0037 0%, #0a0012 70%);
-        position: relative;
-    }
+body::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+        radial-gradient(2px 2px at 10% 20%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 25% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 70% 80%, #fff, transparent),
+        radial-gradient(2px 2px at 50% 30%, #fff, transparent),
+        radial-gradient(1px 1px at 80% 10%, #fff, transparent),
+        radial-gradient(1.2px 1.2px at 90% 60%, #fff, transparent);
+    background-size: cover;
+    animation: starTwinkle 5s linear infinite alternate;
+    z-index: 0;
+}
 
-    body::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background:
-            radial-gradient(2px 2px at 10% 20%, #fff, transparent),
-            radial-gradient(1.5px 1.5px at 25% 50%, #fff, transparent),
-            radial-gradient(1px 1px at 70% 80%, #fff, transparent),
-            radial-gradient(2px 2px at 50% 30%, #fff, transparent),
-            radial-gradient(1px 1px at 80% 10%, #fff, transparent),
-            radial-gradient(1.2px 1.2px at 90% 60%, #fff, transparent);
-        background-size: cover;
-        animation: starTwinkle 5s linear infinite alternate;
-        z-index: 0;
-    }
+@keyframes starTwinkle {0%{opacity:0.3;}50%{opacity:1;}100%{opacity:0.3;}}
 
-    @keyframes starTwinkle {
-        0% { opacity: 0.3; }
-        50% { opacity: 1; }
-        100% { opacity: 0.3; }
-    }
+#secretEmoji {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    z-index: 2;
+    text-shadow: 0 0 15px #fff, 0 0 25px #b36bff;
+    animation: floatEmoji 2s ease-in-out infinite alternate, pulse 1.5s infinite alternate;
+}
 
-    #secretEmoji {
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 3rem;
-        z-index: 2;
-        text-shadow: 0 0 15px #fff, 0 0 25px #b36bff;
-        animation: floatEmoji 2s ease-in-out infinite alternate, pulse 1.5s infinite alternate;
-    }
+@keyframes floatEmoji {0%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(10px);}100%{transform:translateX(-50%) translateY(0);}}
+@keyframes pulse {from{opacity:0.6;}to{opacity:1;}}
 
-    @keyframes floatEmoji {
-        0% { transform: translateX(-50%) translateY(0px); }
-        50% { transform: translateX(-50%) translateY(10px); }
-        100% { transform: translateX(-50%) translateY(0px); }
-    }
+#enterText {
+    position: absolute;
+    top: 20%;
+    font-size: 2.2rem;
+    color: white;
+    letter-spacing: 2px;
+    text-shadow: 0 0 25px #b36bff;
+    animation: pulse 1.5s infinite alternate;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    z-index: 1;
+}
 
-    @keyframes pulse {
-        from { opacity: 0.6; }
-        to   { opacity: 1; }
-    }
+.fadeOut { opacity:0; transform: translateY(-20px); pointer-events:none; }
 
-    #enterText {
-        position: absolute;
-        top: 20%;
-        font-size: 2.2rem;
-        color: white;
-        letter-spacing: 2px;
-        text-shadow: 0 0 25px #b36bff;
-        animation: pulse 1.5s infinite alternate;
-        transition: opacity 0.7s ease, transform 0.7s ease;
-        z-index: 1;
-    }
+#menu {
+    opacity: 0;
+    transition: opacity 1s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 80%;
+    max-width: 350px;
+    z-index: 1;
+}
 
-    .fadeOut {
-        opacity: 0;
-        transform: translateY(-20px);
-        pointer-events: none;
-    }
+.btnWrapper {
+    background: rgba(255,255,255,0.05);
+    padding: 15px;
+    border-radius: 18px;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(185,130,255,0.4);
+    box-shadow: 0 0 25px rgba(170,120,255,0.6);
+    animation: float 4s ease-in-out infinite;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
-    #menu {
-        opacity: 0;
-        transition: opacity 1s ease;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        width: 80%;
-        max-width: 350px;
-        z-index: 1;
-    }
+@keyframes float {0%{transform:translateY(0);}50%{transform:translateY(-10px);}100%{transform:translateY(0);}}
 
-    .btnWrapper {
-        background: rgba(255,255,255,0.05);
-        padding: 15px;
-        border-radius: 18px;
-        backdrop-filter: blur(6px);
-        border: 1px solid rgba(185,130,255,0.4);
-        box-shadow: 0 0 25px rgba(170, 120, 255, 0.6);
-        animation: float 4s ease-in-out infinite;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
+.btnWrapper:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 0 35px rgba(180,120,255,0.8); }
 
-    @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0px); }
-    }
+.menuBtn {
+    width: 100%;
+    font-size: 1.9rem;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px white;
+    transition: 0.25s ease;
+}
 
-    .btnWrapper:hover {
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 0 35px rgba(180,120,255,0.8);
-    }
+.menuBtn:hover { transform: scale(1.12); text-shadow: 0 0 25px #d7a2ff; }
 
-    .menuBtn {
-        width: 100%;
-        font-size: 1.9rem;
-        background: transparent;
-        border: none;
-        color: white;
-        cursor: pointer;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        text-shadow: 0 0 15px white;
-        transition: 0.25s ease;
-    }
-
-    .menuBtn:hover {
-        transform: scale(1.12);
-        text-shadow: 0 0 25px #d7a2ff;
-    }
-
-    #discount {
-        position: absolute;
-        bottom: 20px;
-        width: 100%;
-        text-align: center;
-        font-size: 1.1rem;
-        color: #ffdeff;
-        letter-spacing: 1px;
-        text-shadow: 0 0 12px #d26cff;
-        z-index: 1;
-    }
+#discount {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #ffdeff;
+    letter-spacing: 1px;
+    text-shadow: 0 0 12px #d26cff;
+    z-index: 1;
+}
 </style>
 </head>
 
-<body onclick="startEnter()">
+<body>
 
 <div id="secretEmoji">🤫</div>
-
 <div id="enterText">Click anywhere to begin</div>
 
 <div id="menu">
@@ -177,17 +144,20 @@
 <script>
 let started = false;
 
-function startEnter() {
+// Only trigger startEnter if the click is NOT on a button
+document.body.addEventListener('click', function(event) {
     if (started) return;
-    started = true;
+    if (event.target.closest('.menuBtn')) return; // ignore clicks on menu buttons
+    startEnter();
+});
 
+function startEnter() {
+    started = true;
     document.body.style.cursor = "default";
     const enterText = document.getElementById("enterText");
 
-    // Add fade out + slide up effect
     enterText.classList.add("fadeOut");
 
-    // Remove it from DOM after animation
     setTimeout(() => {
         enterText.style.display = "none";
         document.getElementById("menu").style.opacity = "1";
