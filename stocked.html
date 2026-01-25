@@ -110,7 +110,7 @@ function searchStock() {
     for (const item of stockItems) {
         const itemLower = item.toLowerCase();
         const distance = levenshtein(input, itemLower);
-        const threshold = Math.floor(itemLower.length * 0.3); // allow ~30% typo
+        const threshold = Math.floor(itemLower.length * 0.3); // allow ~30% typo/abbreviation
         if (distance <= threshold) {
             found = true;
             break;
