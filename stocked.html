@@ -85,7 +85,45 @@ button.search-btn:hover {transform:scale(1.08); box-shadow:0 0 55px rgba(180,100
 <script>
 // Stock items list
 const stockItems = [
-"Elf Bar","Lost Mary","Geek Bar","RAZ","Flum","Fifty Bar","Foger","Off-Stamp","Fume","Spaceman","Puff Bar","OXBAR","Hyde","HQD","Kangvape","VIHO","SWFT","Vozol","Kado Bar","Snowwolf","iJoy","Snoopy Smoke","Pillow Talk","Lost Angel","SKE","Elux","Hayati","RifBar","Adjust","DOJO","SOFI","Vapengin","Airis","Orion Bar","Aloha Sun","Binaries","RINNBAR","FLOAT MELLO","JNR","One Tank","Ronaldinho 10","UNO","Cookies","Vaporesso","GeekVape","Smok","Uwell","VOOPOO","Aspire","Innokin","Lost Vape","OXVA","Suorin","Freemax","HorizonTech","Hellvape","Wotofo","Dovpo","DotMod","Vandy Vape","Steam Crave","Sigelei","Joyetech","Kangertech","Eleaf","JAC Vapour","Nevoks","Apollo","Smoko","Vaperz Cloud","Digiflavor","Teslacigs","Think Vape","Smoant","Limitless Mod Co","asMODus","Naked 100","Vapetasia","Juice Head","Dinner Lady","Bar Juice 5000","Pod Salt","IVG","Vampire Vape","Nasty Juice","Monster Vape Labs","Cloud Nurdz","Coastal Clouds","Pachamama","Twist E-Liquids","Keep It 100","Sadboy","7 Daze","Glas Vapor","Riot Squad","Zeus Juice","Beard Vape Co","Candy King","Air Factory","Skwezed","Ohm Brew","Aisu","Innevape","Humble Juice Co","Bad Drip Labs","Ripe Vapes","Fruitia","Pod Juice","The Finest","Vuse","JUUL","NJOY","Blu","Logic","RELX"
+"Elf Bar","Lost Mary","Geek Bar","RAZ","Flum","Fifty Bar","Foger","Off-Stamp","Fume","Spaceman","Puff Bar","OXBAR","Hyde","HQD","Kangvape","VIHO","SWFT","Vozol","Kado Bar","Snowwolf","iJoy","Snoopy Smoke","Pillow Talk","Lost Angel","SKE","Elux","Hayati","RifBar","Adjust","DOJO","SOFI","Vapengin","Airis","Orion Bar","Aloha Sun","Binaries","RINNBAR","FLOAT MELLO","JNR","One Tank","Ronaldinho 10","UNO","Cookies","Vaporesso","GeekVape","Smok","Uwell","VOOPOO","Aspire","Innokin","Lost Vape","OXVA","Suorin","Freemax","HorizonTech","Hellvape","Wotofo","Dovpo","DotMod","Vandy Vape","Steam Crave","Sigelei","Joyetech","Kangertech","Eleaf","JAC Vapour","Nevoks","Apollo","Smoko","Vaperz Cloud","Digiflavor","Teslacigs","Think Vape","Smoant","Limitless Mod Co","asMODus","Naked 100","Vapetasia","Juice Head","Dinner Lady","Bar Juice 5000","Pod Salt","IVG","Vampire Vape","Nasty Juice","Monster Vape Labs","Cloud Nurdz","Coastal Clouds","Pachamama","Twist E-Liquids","Keep It 100","Sadboy","7 Daze","Glas Vapor","Riot Squad","Zeus Juice","Beard Vape Co","Candy King","Air Factory","Skwezed","Ohm Brew","Aisu","Innevape","Humble Juice Co","Bad Drip Labs","Ripe Vapes","Fruitia","Pod Juice","The Finest","Vuse","JUUL","NJOY","Blu","Logic","RELX",
+
+// ---- NEW BRANDS YOU PROVIDED ----
+"710 Labs","&Shine","1SPLIFF","22Red","3Chi","AbsoluteXtracts (ABX)","Aero","Aeriz","AiroPro",
+"Alien Labs","Allure","Alpine Vapor","Amber","American Haze","Ames","Apothecary Extracts",
+"Archive Seed Bank","Area 52","Arizer","Aster Farms","Aurora","Autumn Brands","Avexia","Ayrloom",
+"Back Forty","Backpack Boyz","Baker’s Cannabis Co.","Ball Family Farms","Bear Labs","Beboe",
+"Beezle Extracts","Belushi’s Farm","Big Herb","Binoid","Black Tie CBD","Blazed","Bloom Brands",
+"Bloomz","Blue River","Blueprint","Bob’s Stash","Bonanza","Boxhot","Brite Labs","Broken Coast",
+"Budpop","Buddies","C-Cell","Cactus Labs","Cali Reserve","CAM","Cannabiotix (CBX)",
+"Cannabis Life","Canndescent","Carmel","Caviar Gold","CBDfx","Cheap Thrills","Choice",
+"Church Cannabis Co.","Clade9","Claybourne Co.","Clear","CLSICS","Cold Fire Extracts",
+"Connected Cannabis Co.","Cookies","Copperstate","Cresco","Cultivar Collection","Curaleaf",
+"Dart","DaVinci","DazeD","Delta Extrax","Delta Munchies","Diamond CBD","Diet Smoke",
+"Dime Industries","Doja Pak","Dompen","Don Merfos Exotics","Dosist","Dr. Dabber","Dutchie",
+"E-L","EightVape","Eighty Six","Element Extractions","Elite","Emerald Bay Extracts",
+"Erth Wellness","Eureka","Everyday","Exhale Wellness","Farmer and the Felon","Fear of Boof",
+"Fernway","Fig Farms","Find","Flavorade","FloraCal","Florist Farms","Flowkana","Foray",
+"Friendly Brand","Fuego","Galaxy Treats","Garcia Hand Picked","Geek Bar","General Admission",
+"Ghost","Ghost Drops","Ghostbudsters Farm","Glass House Farms","Gold Drop","Good Green",
+"Good Supply","Grassroots","Green Dot Labs","Green Thumb Industries","Greybeard","GUMBO",
+"Half Bak'd","Hamilton Devices","Happi","Heavy Hitters","High Supply","Highsman",
+"Hixotic","Hollowtips","Hotel Lobby","IKONIK","Incredibles","ItsPurpl","Jaunty","Jeeter",
+"Jetty Extracts","Jungle Boys","Jupiter Research","Khalifa Kush","Khiron","Kingpen",
+"Kiva Confections","Koi CBD","Kolab Project","Korova","Kurvana","Kynd","Lavender","Lazercat",
+"Leiffa","Left Coast Extracts","Leune","LIIIL STIIIZY","Liquid Diamonds","Litty","LivWell",
+"Local Cannabis Co.","Lookah","Looper","Loudpack","LucidMood","Luci","Lume","Lumpy’s Flowers",
+"Maison Bloom","Marley Natural","Matter","Mellow Fellow","MFNY","Mig Vapor","Mitten Extracts",
+"Modern Flower","Modus","Moonwlkr","MTL Cannabis","Muha Meds","Muse","MÜV","Native Roots",
+"New York Honey","Northness","Ocho Extracts","Off Hours","Old Pal","Olio","Ooze","Ozone",
+"Pacific Stone","Papas Herb","PAX","PCKT","Platinum Vapes","Pleasantrees","PlugPlay",
+"Preferred Gardens","Puffco","Pulse","Pure Sunfarms","Purple Hills","Quill","Raw Garden",
+"Redecan","Rezinators","Revolution Cannabis","Roll One","Rove","RYTHM","San Rafael '71",
+"Sauce Essentials","Savvy","Secret Nature","Select","Sherbinskis","Simply Bare","Simply Herb",
+"Single Source","Skymint","Smakd","Spinach","STIIIZY","Storz & Bickel","Superdope","Supherb",
+"Tales & Travels","Teds Budz","The Botanist","The Ten Co","Tilray","Torch","Traditional",
+"TRĒ House","Tribal","Trulieve","Turn","Tweed","Union Electric","United Strains of America",
+"Urb","Ursa Extracts","Vera","Verano","Vessel","VIIA Hemp","Viola","Voodoo","Wana",
+"West Coast Cure","Wild Orchard","Willie’s Reserve","Wizard Trees","Wonderbrett","Wyld","Yocan"
 ];
 
 // Function to calculate Levenshtein Distance
